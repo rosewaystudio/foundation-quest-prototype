@@ -1,0 +1,2402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Your foundation map | Foundation Quest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Light theme only: the page no longer switches to dark when a computer is in dark mode */
+        color-scheme: light;
+        --bg: #f8f6f1;
+        --on-bg: #0e2a40;
+        --surface: #ffffff;
+        --ink: #0b1e3c;
+        --body: #1e2f48;
+        --muted: #4f6178;
+        --line: #e4dfd5;
+        --teal: #2bb3c0;
+        --teal-deep: #1b8794;
+        --teal-text: #0a6670;
+        --tint: #e7f6f8;
+        --tint-strong: #cdeef2;
+        --warn: #8a4b00;
+        --warn-bg: #fff4e2;
+        --warn-line: #e8b76a;
+        --shadow:
+          0 1px 2px rgba(11, 30, 60, 0.04), 0 8px 24px rgba(11, 30, 60, 0.06);
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--body);
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+      }
+      .wrap {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 0 20px 56px;
+      }
+      header.top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 0 14px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: block;
+      }
+      .brand b {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .brand span {
+        display: block;
+        font-size: 13px;
+        color: var(--on-bg);
+        line-height: 1.2;
+      }
+      /* Text that sits directly on the teal background uses the deep navy for contrast */
+      body .lead,
+      body .stats span,
+      body .fine,
+      body .side small,
+      body .results-grid > div > p,
+      body details summary,
+      body details li {
+        color: var(--on-bg);
+      }
+      body .side small {
+        color: var(--muted);
+      }
+      /* The compass sits on a white card so the teal star stays visible */
+      .side,
+      .results-grid .map {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .xp {
+        font-weight: 700;
+        color: var(--teal-text);
+        font-size: 14px;
+        white-space: nowrap;
+        background: var(--surface);
+        border: 1px solid var(--tint-strong);
+        border-radius: 999px;
+        padding: 6px 14px;
+      }
+      .xp:empty {
+        display: none;
+      }
+      /* Navy header band */
+      .band {
+        background: #0b1e3c;
+        margin-bottom: 28px;
+      }
+      .wrap.band-in {
+        padding-bottom: 12px;
+      }
+      .band .brand b {
+        color: #ffffff;
+      }
+      .band .brand span {
+        color: #a9d9df;
+      }
+      .band .xp {
+        border-color: transparent;
+      }
+      .ribbon {
+        font-size: 13px;
+        color: #c9d6e6;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        padding-top: 10px;
+      }
+      h1,
+      h2,
+      h3,
+      .q,
+      .q2,
+      .itemtitle,
+      .brand b,
+      legend {
+        color: var(--ink);
+      }
+
+      h1 {
+        font-size: clamp(28px, 5vw, 44px);
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        font-weight: 800;
+        margin: 8px 0 14px;
+        max-width: 16ch;
+      }
+      h2 {
+        font-size: clamp(22px, 3.4vw, 30px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin: 0 0 10px;
+      }
+      h3 {
+        font-size: 17px;
+        margin: 0 0 6px;
+        font-weight: 700;
+      }
+      p {
+        margin: 0 0 14px;
+        max-width: 62ch;
+      }
+      .lead {
+        font-size: 18px;
+        color: var(--muted);
+        max-width: 54ch;
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+      .grid {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+      @media (min-width: 860px) {
+        .grid.quest {
+          grid-template-columns: minmax(0, 1fr) 300px;
+        }
+        .side {
+          position: sticky;
+          top: 20px;
+        }
+      }
+      .side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .side svg {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+      }
+      .side small {
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .choices {
+        display: grid;
+        gap: 10px;
+        margin: 6px 0 18px;
+      }
+      .choices.cols {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      fieldset {
+        border: 0;
+        padding: 0;
+        margin: 0 0 6px;
+      }
+      legend {
+        font-weight: 600;
+        margin-bottom: 8px;
+        padding: 0;
+      }
+      .opt {
+        font: inherit;
+        color: var(--ink);
+        text-align: left;
+        background: var(--surface);
+        cursor: pointer;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 14px;
+        min-height: 48px;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+      }
+      .opt:hover {
+        border-color: var(--teal);
+        background: #fafdfe;
+      }
+      .opt[aria-pressed="true"] {
+        border-color: var(--teal-deep);
+        background: var(--tint);
+        font-weight: 600;
+        box-shadow: inset 0 0 0 1px var(--teal-deep);
+      }
+      .opt.unsure {
+        border-style: dashed;
+      }
+      .opt:disabled {
+        cursor: default;
+      }
+      .opt:disabled:not([aria-pressed="true"]) {
+        opacity: 0.55;
+      }
+      :focus-visible {
+        outline: 3px solid var(--teal);
+        outline-offset: 2px;
+      }
+
+      .btn {
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        border: 0;
+        border-radius: 10px;
+        padding: 13px 22px;
+        min-height: 48px;
+        background: #0b1e3c;
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(11, 30, 60, 0.16);
+        transition: background 0.15s;
+      }
+      .btn:hover:not(:disabled) {
+        background: var(--teal-deep);
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .link {
+        font: inherit;
+        background: none;
+        border: 0;
+        color: var(--teal-text);
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 6px 0;
+      }
+
+      .meter {
+        height: 6px;
+        background: var(--line);
+        border-radius: 99px;
+        overflow: hidden;
+        margin: 0 0 20px;
+      }
+      .meter i {
+        display: block;
+        height: 100%;
+        background: var(--teal);
+        width: 0;
+        transition: width 0.3s;
+      }
+      .where {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .q {
+        font-size: clamp(21px, 3vw, 26px);
+        line-height: 1.22;
+        letter-spacing: -0.015em;
+        font-weight: 700;
+        margin: 0 0 18px;
+        max-width: 30ch;
+      }
+      .answers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      @media (max-width: 420px) {
+        .answers {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .reveal {
+        margin-top: 20px;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        animation: rise 0.25s ease-out;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          animation: none;
+        }
+        .meter i {
+          transition: none;
+        }
+      }
+      .reveal dl {
+        margin: 0 0 16px;
+      }
+      .reveal dt {
+        font-weight: 700;
+        margin-top: 12px;
+      }
+      .reveal dd {
+        margin: 2px 0 0;
+        max-width: 60ch;
+        color: var(--ink);
+      }
+      .reveal dd.moment {
+        color: var(--teal-text);
+        font-weight: 500;
+      }
+      .win {
+        font-weight: 700;
+        color: var(--teal-text);
+        margin: 0 0 6px;
+      }
+
+      .hold {
+        background: var(--warn-bg);
+        border: 1.5px solid var(--warn-line);
+        color: var(--warn);
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin: 0 0 22px;
+      }
+      .hold h3 {
+        color: var(--warn);
+      }
+      .hold ul {
+        margin: 6px 0 0;
+        padding-left: 20px;
+      }
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+        margin: 6px 0 18px;
+      }
+      .stats b {
+        font-size: 34px;
+        letter-spacing: -0.02em;
+        display: block;
+        line-height: 1.1;
+      }
+      .stats span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .moves {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 18px;
+        display: grid;
+        gap: 12px;
+      }
+      .moves li {
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--teal);
+        border-radius: 12px;
+        padding: 16px 18px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .moves li.gate {
+        border-left-color: var(--warn-line);
+      }
+      .moves .tag {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .moves p {
+        margin: 4px 0 0;
+        font-size: 15px;
+      }
+      details {
+        margin: 0 0 18px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        padding: 6px 0;
+      }
+      details ul {
+        margin: 6px 0 0;
+        padding-left: 20px;
+      }
+      .fine {
+        font-size: 13px;
+        color: var(--muted);
+        max-width: 70ch;
+      }
+      .results-grid {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 1fr;
+      }
+      .results-grid .map {
+        order: -1;
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      @media (min-width: 860px) {
+        .results-grid {
+          grid-template-columns: minmax(0, 1fr) 380px;
+          align-items: start;
+        }
+        .results-grid .map {
+          order: 0;
+          position: sticky;
+          top: 20px;
+          margin: 0;
+        }
+      }
+      .map svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .ask {
+        border: 1.5px solid var(--teal);
+        background: var(--tint);
+        border-radius: 14px;
+        padding: 22px;
+        margin: 0 0 22px;
+      }
+      .ask h2 {
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+      .ask label.f {
+        display: block;
+        font-weight: 600;
+        margin: 12px 0 4px;
+      }
+      .ask input[type="text"],
+      .ask input[type="email"] {
+        font: inherit;
+        color: var(--ink);
+        background: var(--surface);
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        padding: 11px 12px;
+        min-height: 46px;
+        width: 100%;
+        max-width: 420px;
+        display: block;
+      }
+      .ask input[type="text"]:focus-visible,
+      .ask input[type="email"]:focus-visible {
+        border-color: var(--teal);
+      }
+      .ask .chk {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        margin: 14px 0 16px;
+        max-width: 52ch;
+      }
+      .ask .chk input {
+        width: 20px;
+        height: 20px;
+        margin-top: 3px;
+        flex: none;
+        accent-color: var(--teal-deep);
+      }
+      .ask .err {
+        color: var(--warn);
+        font-size: 14px;
+        min-height: 20px;
+        margin: 6px 0 0;
+      }
+      .ask .done p {
+        margin: 0 0 6px;
+      }
+
+      .itemtitle {
+        font-size: clamp(22px, 3.2vw, 28px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin: 0 0 6px;
+        max-width: 28ch;
+      }
+      .explain {
+        margin: 0 0 20px;
+      }
+      .explain dt {
+        font-weight: 700;
+        margin-top: 12px;
+      }
+      .explain dd {
+        margin: 2px 0 0;
+        max-width: 60ch;
+      }
+      .q2 {
+        font-size: 19px;
+        line-height: 1.3;
+        font-weight: 700;
+        margin: 0 0 12px;
+        max-width: 40ch;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+      .draft {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--warn);
+        background: var(--warn-bg);
+        border: 1px solid var(--warn-line);
+        border-radius: 99px;
+        padding: 2px 10px;
+        margin: 0 0 8px;
+      }
+      .alert {
+        background: var(--warn-bg);
+        border-left: 4px solid var(--warn-line);
+        color: var(--warn);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin: 0 0 16px;
+        font-size: 15px;
+        font-weight: 600;
+        max-width: 62ch;
+      }
+      .src {
+        font-size: 13px;
+        color: var(--muted);
+        max-width: 62ch;
+      }
+      .src a,
+      .fine a {
+        color: var(--teal-text);
+      }
+      .opt small {
+        display: block;
+        font-weight: 400;
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 2px;
+      }
+      .fq {
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+      .fq:first-of-type {
+        border-top: 0;
+      }
+      .fq p {
+        margin: 0 0 8px;
+        font-weight: 600;
+        max-width: 60ch;
+      }
+      .fq .hint {
+        font-weight: 400;
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: -4px;
+      }
+      .fq .yn {
+        display: flex;
+        gap: 10px;
+      }
+      .fq .yn .opt {
+        min-width: 84px;
+      }
+      .catlabel {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--teal-text);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 18px 0 0;
+      }
+      .note {
+        background: var(--tint);
+        border-left: 4px solid var(--teal);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin: 0 0 16px;
+        font-size: 15px;
+        max-width: 62ch;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="band">
+      <div class="wrap band-in">
+        <header class="top">
+          <a class="brand" href="/" aria-label="Foundation Quest home" style="text-decoration:none">
+            <img
+              src="data:image/jpeg;base64,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"
+              alt="Roseway Studio compass rose logo"
+            />
+            <div><b>Foundation Quest</b><span>Roseway Studio</span></div>
+          </a>
+          <div class="xp" id="xp" aria-live="polite"></div>
+        </header>
+        <div class="ribbon">
+          Prototype v1, built for testing. A general guide, not legal, tax, or
+          financial advice. Nothing you enter is saved or sent. Items tagged
+          “Draft” haven’t been checked against an official source yet.
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <main id="app"></main>
+    </div>
+
+    <script>
+      /* ---------- Content ----------
+   Why / how / Michigan details come from the Roseway Business Infrastructure Checklist.
+   The "moment" lines (when it usually comes up) are working hypotheses to test in interviews. */
+      const LEVELS = {
+        decide: {
+          name: "Decide",
+          short: "Decide",
+          blurb: "Settle the basics before you file anything.",
+          items: [
+            {
+              id: "bplan",
+              title: "Written business plan",
+              q: "Do you have a written business plan?",
+              why: "It isn’t a document for investors that you never open again. It’s the operating thesis of your business: who you serve, what you deliver, how you make money, and what success looks like.",
+              how: "At minimum: mission, target market, services and pricing, competitive positioning, revenue model, and 12-month goals.",
+              moment: "A funder, lender, or partner asks to see one.",
+            },
+            {
+              id: "name",
+              title: "Business name secured",
+              q: "Have you checked that your business name is available with the state and as a web domain?",
+              why: "Your business name should be secured in two places: your state’s business registry and as a domain name. Check both before committing to a name.",
+              how: "Check the state’s business registry and a domain registrar before you commit to a name, and before you print anything.",
+              moment:
+                "You’re ready to file or print cards and the name or domain is already taken.",
+            },
+            {
+              id: "tm",
+              title: "Trademark search",
+              q: "Have you searched to make sure your business name isn’t already trademarked?",
+              why: "Operating under a name or logo that’s already trademarked can force a rebrand.",
+              how: "Search tmsearch.uspto.gov. It’s free and takes under 30 minutes.",
+              moment:
+                "You’re forced to rebrand after you’ve already printed and launched.",
+            },
+          ],
+        },
+        form: {
+          name: "Form the business",
+          short: "Form",
+          blurb: "Make it a legal entity, with professionals in your corner.",
+          items: [
+            {
+              id: "atty",
+              title: "Business attorney identified",
+              q: "Do you know which business attorney you’d call if you needed one?",
+              why: "You don’t need a retainer, but you should know who you’d call before you need one, so you’re not choosing under pressure.",
+              how: "Michigan Bar Lawyer Referral Service: michbar.org.",
+              moment:
+                "Something goes wrong and you’re choosing a lawyer in a hurry.",
+            },
+            {
+              id: "entity",
+              title: "Business formed with the state",
+              titleN: "Nonprofit incorporated with the state",
+              gate: true,
+              skipFor: ["sole"],
+              q: "Is your business legally formed with the state?",
+              qN: "Is your nonprofit incorporated with the state?",
+              why: "Your legal structure determines how you’re taxed, how your personal assets are protected, and how contracts are written. Without a formal entity, your personal and business finances are legally the same thing.",
+              how: "File with Michigan LARA. The LLC formation fee is $50, and online processing typically takes 5 to 10 business days. The Articles must name a resident agent: a person or service with a Michigan street address that receives legal documents for the business.",
+              moment:
+                "A bank, client, or funder asks for the name of your legal entity.",
+            },
+            {
+              id: "ein",
+              title: "EIN (federal tax ID)",
+              gate: true,
+              q: "Do you have an EIN, your federal tax ID?",
+              why: "You need it to open a business bank account, file business taxes, and apply for most grants and contracts.",
+              how: "Apply free at irs.gov. It takes about 10 minutes.",
+              moment:
+                "You go to open a business bank account or fill out a grant application.",
+            },
+            {
+              id: "board",
+              title: "Board of three with defined roles",
+              np: true,
+              q: "Do you have a board of at least three members with defined roles?",
+              why: "A nonprofit is governed by its board, not its founder. The IRS requires a functioning board for 501(c)(3) status.",
+              how: "Michigan requires at least 3 board members. Define at minimum a Chair, Secretary, and Treasurer.",
+              moment:
+                "An application asks for your board list and affiliations.",
+            },
+            {
+              id: "det",
+              title: "IRS 501(c)(3) determination letter",
+              gate: true,
+              np: true,
+              q: "Do you have your IRS 501(c)(3) determination letter?",
+              why: "501(c)(3) status grants federal tax exemption and makes you eligible for tax-deductible donations and most foundation grants.",
+              how: "Apply with IRS Form 1023, or Form 1023-EZ for smaller organizations. Fees run $275 to $600. Work with a nonprofit attorney or accountant.",
+              moment: "A foundation’s application asks you to upload it.",
+            },
+            {
+              id: "dba",
+              title: "Assumed name (DBA) registered",
+              optional: true,
+              q: "If you operate under a name different from your legal name, is it registered as a DBA?",
+              why: "If you operate under a name different from your legal entity name, you need a DBA registration to open bank accounts, sign contracts, and accept payments under your operating name.",
+              how: "Sole proprietors and general partnerships file with the county clerk in each county where they do business. LLCs and corporations file a Certificate of Assumed Name with LARA, and the fee is listed as $25. County fees vary, so confirm the current fee and renewal rules before filing.",
+              howSole:
+                "File with the county clerk in each county where you do business. Fees vary by county, so confirm the current fee and renewal rules before filing.",
+              moment:
+                "A bank or payment platform asks for proof that you can operate under that name.",
+            },
+            {
+              id: "license",
+              title: "Business licenses and local permits",
+              q: "Do you have the licenses and local permits your work requires?",
+              why: "Depending on your business type and location, you may need a city or county business license, a professional license, or a home occupation permit.",
+              how: "Check with your city or township clerk. Detroit businesses may need a City of Detroit business license.",
+              moment:
+                "A venue, inspector, or city office asks to see your license.",
+            },
+          ],
+        },
+        money: {
+          name: "Set up money",
+          short: "Money",
+          blurb: "How money moves in, out, and through the business.",
+          items: [
+            {
+              id: "bank",
+              title: "Business checking account",
+              gate: true,
+              q: "Is your business money kept in its own checking account?",
+              why: "Mixing personal and business funds is the most common mistake early-stage founders make. It undermines your LLC protection, creates bookkeeping chaos, and makes tax preparation harder.",
+              how: "You’ll need your EIN, state registration documents, personal ID, and an initial deposit.",
+              moment:
+                "Tax time, or a funder asks to see business bank statements.",
+            },
+            {
+              id: "pay",
+              title: "Professional payment platform",
+              q: "Can customers pay you through a payment platform, not just Zelle, Venmo, or a check?",
+              why: "Payment by check or personal transfer is a liability at any serious price point. A payment platform creates a paper trail, handles reminders, and signals that you operate like a real business.",
+              how: "The checklist lists Stripe, Wave, and QuickBooks Payments as options.",
+              moment:
+                "A customer wants to pay by card or asks for an invoice with a pay link.",
+            },
+            {
+              id: "tax",
+              title: "Quarterly estimated tax plan",
+              q: "Do you have a plan for quarterly estimated taxes?",
+              why: "As a self-employed owner, taxes aren’t withheld automatically. You’re required to make quarterly estimated payments or face underpayment penalties.",
+              how: "A common rule of thumb is setting aside 25 to 30 percent of net profit in your business savings account for federal and state taxes. Confirm your obligation with a CPA. Michigan uses Form MI-1040ES.",
+              moment: "A quarterly deadline passes and you owe a penalty.",
+            },
+          ],
+        },
+        sell: {
+          name: "Get ready to sell",
+          short: "Sell",
+          blurb: "Price it, paper it, and protect it before the first sale.",
+          items: [
+            {
+              id: "pricing",
+              title: "Pricing written down",
+              q: "Is your pricing written down somewhere?",
+              why: "Pricing that lives in your head changes under pressure. Even a simple rate card creates consistency and keeps you from undercharging clients you like.",
+              how: "A simple internal rate card is enough to start.",
+              moment:
+                "A client pushes back on price and you improvise a discount.",
+            },
+            {
+              id: "proj",
+              title: "12-month financial projections",
+              gate: true,
+              q: "Do you have financial projections for the next 12 months?",
+              why: "Revenue goals without projections are wishes. Projections force you to answer how many clients you need, at what price, and what’s left.",
+              how: "You don’t need a CFO. You need a spreadsheet and honest assumptions.",
+              moment:
+                "A funder asks for projections, or cash runs short mid-year.",
+            },
+            {
+              id: "contract",
+              title: "Signed client agreement",
+              q: "Does every client sign a written agreement before work starts?",
+              qN: "Do you have written agreements with the people and organizations you work with?",
+              why: "With no contract, you have no legal ground when a client disputes a deliverable, delays payment, or expands scope.",
+              how: "At minimum: scope, payment terms, late payment consequences, change orders, IP ownership, confidentiality, termination, and governing law.",
+              moment: "A client disputes the work or stops paying.",
+            },
+            {
+              id: "review",
+              title: "Attorney-reviewed contract",
+              q: "Has a licensed attorney reviewed your contract?",
+              why: "A contract you wrote yourself or pulled from a template hasn’t been checked for enforceability under your state’s law.",
+              how: "A 1 to 2 hour review from a Michigan business attorney typically costs $200 to $400. The Michigan Bar Lawyer Referral Service is at michbar.org.",
+              moment: "The first time the contract is actually tested.",
+            },
+            {
+              id: "change",
+              title: "Change order process",
+              optional: true,
+              q: "Is there a written process for when a client asks for more than the original scope?",
+              why: "Scope creep is the most common source of undercompensation. A written request, an agreed fee, and a signature before work begins means extra work is always paid for.",
+              how: "Written request, agreed fee, signed before the work begins.",
+              moment:
+                "A client asks for “one small addition” for the third time.",
+            },
+            {
+              id: "sub",
+              title: "Subcontractor agreements",
+              optional: true,
+              q: "If you use subcontractors, does each one sign an agreement?",
+              why: "Subcontractors and freelancers need a signed independent contractor agreement covering scope, payment, confidentiality, and IP ownership.",
+              how: "Cover scope, payment, confidentiality, and who owns the work.",
+              moment:
+                "A subcontractor keeps the files or contacts your client directly.",
+            },
+            {
+              id: "gl",
+              title: "General liability insurance",
+              q: "Do you have general liability insurance?",
+              why: "It protects against claims of bodily injury, property damage, and certain personal injury claims. Some clients and venues require proof before engaging you.",
+              how: "Next Insurance and Hiscox offer small-business policies, often $300 to $600 a year.",
+              moment: "A venue or client asks for a certificate of insurance.",
+            },
+            {
+              id: "eo",
+              title: "Professional liability (E&O) insurance",
+              q: "Do you have professional liability insurance, also called E&O?",
+              why: "It protects you if a client claims your advice or services caused them financial harm. For consulting and advisory work, this is the more critical coverage.",
+              how: "Expect $500 to $1,500 a year depending on revenue and scope.",
+              moment: "A client says your work cost them money.",
+            },
+          ],
+        },
+        run: {
+          name: "Run the business",
+          short: "Run",
+          blurb: "Keep it in good standing.",
+          items: [
+            {
+              id: "annual",
+              title: "Annual state filing current",
+              gate: true,
+              optional: true,
+              skipFor: ["sole"],
+              q: "Are your annual state filings up to date?",
+              why: "Michigan requires LLCs and corporations to file an Annual Statement with LARA each year to stay in good standing. If you miss it, the entity can be dissolved and your liability protection disappears.",
+              how: "For LLCs the fee is $25, due February 15 each year.",
+              moment:
+                "A funder, lender, or client checks that you’re in good standing.",
+            },
+          ],
+        },
+        fund: {
+          name: "Fund it",
+          short: "Fund",
+          blurb: "What funders and donors ask for.",
+          items: [
+            {
+              id: "f990",
+              title: "Form 990 filing current",
+              gate: true,
+              np: true,
+              q: "Is your Form 990 filing up to date?",
+              why: "The Form 990 is public, and funders and donors will look at it. Three consecutive years of not filing results in automatic revocation of tax-exempt status.",
+              how: "Under $50K in gross receipts: 990-N. Under $200K: 990-EZ. Over $200K: the full 990.",
+              moment:
+                "A funder checks your filings before they review your application.",
+            },
+            {
+              id: "pkg",
+              title: "Grant readiness package",
+              gate: true,
+              np: true,
+              q: "Could you pull together a full grant readiness package this week?",
+              why: "Most foundation grants ask for the same core documents. If they aren’t current and easy to find, you can’t respond quickly when an opportunity appears.",
+              how: "Determination letter, current Form 990, current-year budget, audited financials, board list with affiliations, and program descriptions with outcome data.",
+              moment: "A grant opens with a short deadline.",
+            },
+            {
+              id: "uei",
+              title: "Unique Entity ID (UEI) from SAM.gov",
+              gate: true,
+              optional: true,
+              q: "If you’re pursuing federal contracts or grants, are you registered in SAM.gov with a Unique Entity ID?",
+              why: "It’s required if you intend to pursue federal government contracts or federal grant funding.",
+              how: "SAM.gov creates your Unique Entity ID. Registration is free, and you must review and maintain it annually.",
+              moment:
+                "A federal grant or contract application asks for your UEI.",
+            },
+          ],
+        },
+      };
+
+      /* ---------- v1 restructure (10/5/26) ----------
+   Business only: nonprofit items and the Fund stage are removed.
+   Category items below come from the Foundation Quest Regulatory Reference v1.
+   status: v = verified against an official source on 10/5/26; p = partly verified; n = needs a source; r = refer to a professional.
+   Anything not "v" shows a "Draft, not yet verified" tag. */
+      delete LEVELS.fund;
+      LEVELS.form.items = LEVELS.form.items.filter((it) => !it.np);
+
+      const SRC = {
+        mdardFaq: {
+          t: "MDARD Cottage Food FAQ",
+          u: "https://www.michigan.gov/mdard/food-dairy/cottage-food/getting-started-faq",
+        },
+        mdardLabel: {
+          t: "MDARD Cottage Food Labeling",
+          u: "https://www.michigan.gov/mdard/food-dairy/cottage-food/labeling",
+        },
+        mdardSell: {
+          t: "MDARD Selling and Samples",
+          u: "https://www.michigan.gov/mdard/food-dairy/cottage-food/selling-and-samples",
+        },
+        trSales: {
+          t: "Michigan Treasury Sales Tax License FAQ",
+          u: "https://www.michigan.gov/taxes/business-taxes/sales-use-tax/information/sales-tax-license-faq",
+        },
+        trRab: {
+          t: "Michigan Treasury RAB 2026-2",
+          u: "https://www.michigan.gov/taxes/rep-legal/rab/2026-revenue-administrative-bulletins/revenue-administrative-bulletin-2026-2",
+        },
+        fdaDrug: {
+          t: "FDA: Is It a Cosmetic, a Drug, or Both?",
+          u: "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/it-cosmetic-drug-or-both-or-it-soap",
+        },
+        fdaSoap: {
+          t: "FDA Soap FAQ",
+          u: "https://www.fda.gov/cosmetics/cosmetic-products/frequently-asked-questions-soap",
+        },
+        fdaSmall: {
+          t: "FDA Small Businesses & Homemade Cosmetics",
+          u: "https://www.fda.gov/cosmetics/resources-industry-cosmetics/small-businesses-homemade-cosmetics-fact-sheet",
+        },
+        cpscCloth: {
+          t: "CPSC Clothing FAQ",
+          u: "https://www.cpsc.gov/FAQ/Clothing",
+        },
+        cpscTrack: {
+          t: "CPSC Tracking Label FAQ",
+          u: "https://www.cpsc.gov/Business--Manufacturing/Business-Education/tracking-label/FAQ-Tracking-Labels-on-Childrens-Products",
+        },
+        cpscDraw: {
+          t: "CPSC Drawstrings FAQ",
+          u: "https://www.cpsc.gov/FAQ/Drawstrings-in-Children%E2%80%99s-Upper-Outerwear",
+        },
+        cpscBatch: {
+          t: "CPSC Small Batch FAQ",
+          u: "https://cpsc.gov/FAQ/Small-Batch",
+        },
+        lara: {
+          t: "LARA Residential Builder FAQ",
+          u: "https://www.michigan.gov/lara/-/media/Project/Websites/lara/bcc-media/Licensing/Residential-Builders/Builders-FAQ.pdf?rev=7e26f192aff545448c101d2ba52921c4",
+        },
+      };
+
+      const has = (c) => state.cats.includes(c);
+      const yes = (k) => !!state.f[k];
+      const isProduct = () => has("food") || has("cos") || has("goods");
+      const isService = () => has("trade") || has("pro") || has("othersvc");
+
+      /* Existing items that now depend on what you sell */
+      LEVELS.sell.items.find((it) => it.id === "eo").when = () => isService();
+
+      const EXTRA = {
+        decide: [
+          {
+            id: "fpath",
+            title: "Cottage food or licensed path chosen",
+            status: "v",
+            src: [SRC.mdardFaq],
+            when: () => has("food"),
+            what: "Michigan’s cottage food exemption lets you sell certain foods made in your own home kitchen without a state food license. Food outside the exemption needs a licensed kitchen.",
+            q: "Do you know whether your foods qualify as cottage food or need a licensed kitchen?",
+            why: "It decides where you can cook, where you can sell, and how much you can make. Cottage food covers only shelf-stable foods made in your primary home kitchen, not canned, pickled, or acidified foods.",
+            how: "Cottage food needs no license or registration. The cap is $50,000 a year in gross sales, or $75,000 if products sell for $250 or more each. Renting a commercial kitchen, making refrigerated foods, or selling to stores puts you on the licensed path.",
+            moment:
+              "You want to rent a commercial kitchen, or a café asks to carry your product.",
+            alert: () =>
+              yes("fridge") || yes("kitchen") || yes("stores")
+                ? "Based on your answers, at least part of what you sell likely needs a food establishment license, not the cottage food exemption."
+                : "",
+          },
+        ],
+        form: [
+          {
+            id: "fzone",
+            title: "Local rules checked for home food sales",
+            status: "v",
+            src: [SRC.mdardFaq],
+            when: () => has("food"),
+            what: "Local zoning rules are your city’s or township’s rules about what kinds of businesses can run from a home.",
+            q: "Have you checked that your city or township allows a home food business?",
+            why: "The cottage food exemption only covers state licensing and inspection. Local rules still apply.",
+            how: "Call your city or township clerk or planning office before you start selling.",
+            moment: "A neighbor complains.",
+          },
+          {
+            id: "contractor",
+            title: "Residential contractor license",
+            status: "v",
+            src: [SRC.lara],
+            when: () => has("trade") && yes("build"),
+            what: "A Residential Builder or Maintenance & Alteration Contractor license is a state license from LARA for paid work on homes. The $600 figure here is a licensing threshold, not a tax rule.",
+            q: "Do you have a state contractor license, or do all of your home jobs stay under $600?",
+            why: "Michigan requires a license for residential construction, remodeling, or repair priced at $600 or more, counting labor and materials together.",
+            how: "Builders cover full construction. Maintenance & Alteration contractors cover specific trades on existing homes, like roofing, siding, painting, masonry, and concrete. Splitting one job into contracts under $600 doesn’t avoid the rule.",
+            moment: "A small handyman job grows into a bigger one.",
+            alert: () =>
+              yes("over600")
+                ? "You said some of your jobs reach $600 or more. That work requires a license."
+                : "",
+          },
+          {
+            id: "tradelic",
+            title: "Electrical, plumbing, or HVAC license",
+            status: "p",
+            optional: true,
+            when: () => has("trade") && yes("build"),
+            what: "Trade licenses are separate state licenses for electrical, plumbing, and mechanical (HVAC) work.",
+            q: "If you do electrical, plumbing, or HVAC work, do you hold the license for that trade?",
+            why: "These trades are licensed separately from the builder and Maintenance & Alteration licenses.",
+            how: "Look up your trade’s license with LARA’s Bureau of Construction Codes.",
+            moment:
+              "A customer asks you to swap a light fixture or a water heater.",
+          },
+          {
+            id: "detroitreg",
+            title: "City of Detroit contractor registration",
+            status: "n",
+            optional: true,
+            when: () => has("trade") && yes("build"),
+            what: "A city registration is a separate step some cities require on top of a state license.",
+            q: "If you work in Detroit, have you registered with the city as a licensed contractor?",
+            why: "Detroit’s city code appears to require state-licensed contractors to register with the city’s Buildings, Safety Engineering and Environmental Department (BSEED).",
+            how: "Confirm the current requirement with BSEED before you take work in Detroit.",
+            moment: "You pull a permit for a job in Detroit.",
+          },
+          {
+            id: "ptin",
+            title: "IRS tax preparer number (PTIN)",
+            status: "n",
+            when: () => has("pro") && yes("taxprep"),
+            what: "A PTIN is the identification number the IRS issues to people who prepare federal tax returns for pay.",
+            q: "If you prepare tax returns for pay, do you have a PTIN?",
+            why: "Paid federal tax preparers need one.",
+            how: "Apply through the IRS website.",
+            moment: "A bookkeeping client asks you to file their return.",
+          },
+        ],
+        money: [
+          {
+            id: "salestax",
+            title: "Sales tax license",
+            status: "v",
+            src: [SRC.trSales],
+            when: () => isProduct() || (has("pro") && yes("prints")),
+            what: "A sales tax license is a free registration with Michigan Treasury that lets you collect Michigan’s 6% sales tax and send it to the state.",
+            q: "Do you have a Michigan sales tax license?",
+            why: "Anyone selling physical goods to the final customer needs one. The exception: if you sell at two or fewer events a year, you can file a one-time event return (Form 5089) instead.",
+            how: "Register online through Michigan Treasury Online (MTO), or with Form 518. You can start selling before the license arrives. Licenses run January through December.",
+            moment:
+              "Your third market of the season, when the organizer asks for your license number.",
+            alert: () =>
+              has("food") && !has("cos") && !has("goods")
+                ? "Selling only food? Most food is exempt from sales tax, and whether you still need a license is a question for a CPA."
+                : "",
+          },
+          {
+            id: "foodtax",
+            title: "Taxable and exempt food sorted out",
+            status: "r",
+            pro: "a CPA",
+            src: [SRC.trRab],
+            when: () => has("food"),
+            what: "Michigan exempts most food from sales tax but taxes prepared food.",
+            q: "Do you know which of your products are taxable?",
+            why: "Bakery items stay exempt only when sold without eating utensils. Hot drinks, plated desserts, and catering can be taxable.",
+            how: "Treasury’s Revenue Administrative Bulletin 2026-2 explains the rules. Confirm your products with a CPA.",
+            moment: "You add hot drinks or plated desserts.",
+          },
+          {
+            id: "mattax",
+            title: "Tax on materials you bill for",
+            status: "r",
+            pro: "a CPA",
+            when: () => has("trade") && yes("materials"),
+            what: "Sales and use tax can apply when you buy materials and bill clients for them.",
+            q: "Do you know how tax works on materials you bill to clients?",
+            why: "Billing for materials can create sales or use tax obligations.",
+            how: "Ask a CPA how your invoices should handle materials.",
+            moment: "You bill a client for materials.",
+          },
+          {
+            id: "printtax",
+            title: "Tax on prints and products",
+            status: "r",
+            pro: "a CPA",
+            when: () => has("pro") && yes("prints"),
+            what: "Prints, albums, and other physical products are goods, even when you sell them alongside a service.",
+            q: "Do you know whether to collect sales tax on the prints or products you sell?",
+            why: "Physical goods are generally taxable, even when you mostly sell a service.",
+            how: "Ask a CPA how to handle your service and product sales.",
+            moment: "A client orders prints or an album.",
+          },
+        ],
+        sell: [
+          {
+            id: "pl",
+            title: "Product liability insurance",
+            status: "r",
+            pro: "an insurance broker",
+            when: () => isProduct(),
+            what: "Product liability insurance covers claims that something you sold caused an injury or damage.",
+            q: "Do you have product liability insurance?",
+            why: "For people who sell products, this is the coverage that matters most. Some markets and venues ask for proof.",
+            how: "Ask an insurance broker about coverage for what you make.",
+            moment: "A market asks for a certificate of insurance.",
+          },
+          {
+            id: "flabel",
+            title: "Cottage food labels",
+            status: "v",
+            src: [SRC.mdardLabel],
+            when: () => has("food"),
+            what: "A cottage food label is the information MDARD requires on every product you sell.",
+            q: "Does every product carry a label that meets MDARD’s rules?",
+            why: "Labels let customers check what’s in your food and let inspectors trace a product if someone gets sick.",
+            how: "Include your name and home address, the product name, ingredients by weight (including what’s inside prepared ingredients), net weight with metric, allergens, and the statement that it was made in a home kitchen not inspected by MDARD, in at least 11-point type. Custom cakes: put this on the invoice. Prefer not to print your home address? MSU Product Center’s free voluntary registration lets you use a registration number and phone number instead.",
+            moment: "Your first market.",
+          },
+          {
+            id: "fallergen",
+            title: "Allergens named on labels",
+            status: "n",
+            when: () => has("food"),
+            what: "Allergen labeling means naming any major food allergen your product contains.",
+            q: "Do your labels name every major allergen your products contain?",
+            why: "Federal law lists nine major allergens: milk, eggs, fish, shellfish, tree nuts, peanuts, wheat, soybeans, and sesame. MDARD’s page still lists eight and leaves out sesame.",
+            how: "Name allergens in the ingredient list or in a “Contains” line, and name the specific tree nut, like almonds or walnuts.",
+            moment: "A customer asks about allergies.",
+          },
+          {
+            id: "fsell",
+            title: "Where and how you can sell cottage food",
+            status: "v",
+            src: [SRC.mdardSell],
+            when: () => has("food"),
+            what: "Cottage food has to be sold directly from you to the customer.",
+            q: "Do you know where and how you’re allowed to sell cottage food?",
+            why: "You can sell online, by mail, or through delivery apps if the customer can talk to you before buying, and only within Michigan. No wholesale, stores, restaurants, or consignment.",
+            how: "Sell direct: markets, stands, your own site, or DMs. Products can’t be donated to auctions, fundraisers, or soup kitchens.",
+            moment: "You start taking orders through DMs or a delivery app.",
+            alert: () =>
+              yes("stores")
+                ? "You said you sell to stores, cafés, or on consignment. Cottage food can’t be sold that way."
+                : "",
+          },
+          {
+            id: "fvenue",
+            title: "Market vendor rules checked",
+            status: "v",
+            src: [SRC.mdardFaq],
+            when: () => has("food"),
+            what: "Vendor rules are a market’s own requirements for who can sell there.",
+            q: "Do you check each market’s vendor rules before you apply?",
+            why: "Markets can set their own rules, and some require a food license even from cottage food sellers.",
+            how: "Ask each market for its vendor requirements before you pay a booth fee.",
+            moment: "You apply to a new market.",
+          },
+          {
+            id: "cclaims",
+            title: "No drug claims on cosmetics",
+            status: "v",
+            src: [SRC.fdaDrug],
+            when: () => has("cos"),
+            what: "A drug claim is wording that says a product treats, heals, or prevents a condition, or changes how the body works.",
+            q: "Are your labels, website, and posts free of claims that a product treats, heals, or relieves anything?",
+            why: "The FDA decides whether a product is a cosmetic or a drug from what you say it does, and drugs need FDA approval before they’re sold. “Soothes eczema,” “helps you sleep,” “relieves muscle pain,” and SPF all count.",
+            how: "Describe what the product does for appearance and feel: cleanses, moisturizes, smells good. Take treatment language off labels, captions, and booth signs.",
+            moment: "You write an Instagram caption or a booth sign.",
+            alert: () =>
+              yes("claims")
+                ? "You said your wording includes treatment claims or SPF. Remove those claims, or talk to a regulatory professional before selling."
+                : "",
+          },
+          {
+            id: "csoap",
+            title: "Soap classified correctly",
+            status: "v",
+            src: [SRC.fdaSoap],
+            when: () => has("cos") && yes("soap"),
+            what: "Depending on how it’s made and what you say about it, soap can be a consumer product, a cosmetic, or a drug.",
+            q: "Do you know whether your soap counts as soap or as a cosmetic?",
+            why: "Soap made mainly from fats and lye and sold only to clean is regulated by the CPSC. Say it moisturizes, deodorizes, or scents the skin and the FDA treats it as a cosmetic. Say it treats a skin condition and it’s a drug.",
+            how: "Decide which you’re selling and make the label match.",
+            moment: "You write the label for a new soap.",
+          },
+          {
+            id: "caddress",
+            title: "Business address on cosmetic labels",
+            status: "v",
+            src: [SRC.fdaSmall],
+            when: () => has("cos"),
+            what: "The place of business is the address the FDA requires on every cosmetic label.",
+            q: "Do your cosmetic labels show a street address for your business?",
+            why: "FDA rules require a street address, city, state, and ZIP. A P.O. box or website doesn’t count, so home makers often end up printing their home address.",
+            how: "Use your home address, or a business address with “Distributed by.” There’s no registration workaround like the one for cottage food.",
+            moment: "Your first label print.",
+          },
+          {
+            id: "ccontact",
+            title: "Contact for reaction reports",
+            status: "p",
+            when: () => has("cos"),
+            what: "A reaction contact is a way for customers to report a bad reaction to your product.",
+            q: "Do your labels give a U.S. address, phone number, or email for reporting reactions?",
+            why: "Federal cosmetics law (MoCRA) requires one on labels, and small businesses aren’t exempt.",
+            how: "Add a phone number or email customers can use to report a reaction.",
+            moment: "You redesign your labels.",
+          },
+          {
+            id: "clabel",
+            title: "Other cosmetic label elements",
+            status: "n",
+            when: () => has("cos"),
+            what: "Standard cosmetic labels name the product, its net contents, and its ingredients.",
+            q: "Do your labels show the product name, net contents, and a full ingredient list?",
+            why: "These are standard FDA cosmetic label elements.",
+            how: "Check FDA’s Cosmetic Labeling Guide.",
+            moment: "Your first label print.",
+          },
+          {
+            id: "csafety",
+            title: "Safety records on file",
+            status: "v",
+            src: [SRC.fdaSmall],
+            when: () => has("cos"),
+            what: "Safety substantiation means records that show why you’re confident a product is safe.",
+            q: "Do you keep records showing why your products are safe?",
+            why: "Whoever’s name is on the label has to be able to back up the product’s safety with records.",
+            how: "Keep your suppliers’ safety documents and any published ingredient safety reviews you rely on. Animal testing isn’t required.",
+            moment: "A customer reports a reaction.",
+          },
+          {
+            id: "ccolor",
+            title: "Colors approved for cosmetics",
+            status: "v",
+            src: [SRC.fdaSmall],
+            when: () => has("cos"),
+            what: "Color additives are the dyes, pigments, and micas that give a product its color.",
+            q: "Are the colorants you use approved by the FDA for your type of product?",
+            why: "Color additives are the one ingredient type that needs FDA approval, and only for specific uses. Craft-store mica and dyes aren’t automatically approved.",
+            how: "Check FDA’s list of color additives permitted in cosmetics before you buy.",
+            moment: "You order colorants from a craft supplier.",
+          },
+          {
+            id: "gflam",
+            title: "Clothing meets the flammability standard",
+            status: "v",
+            src: [SRC.cpscCloth],
+            when: () => has("goods") && yes("clothing"),
+            what: "The federal flammability standard sets how quickly clothing fabric is allowed to burn.",
+            q: "Do you know your fabrics meet the federal flammability standard for clothing?",
+            why: "All clothing must meet 16 CFR part 1610. Plain fabrics weighing 2.6 ounces per square yard or more are exempt from testing, but not from the rule.",
+            how: "Check your fabric weights, and ask your blank suppliers for their compliance information.",
+            moment: "You start a clothing line.",
+          },
+          {
+            id: "gcpc",
+            title: "Children’s Product Certificate",
+            status: "v",
+            src: [SRC.cpscCloth],
+            when: () => has("goods") && yes("kids"),
+            what: "A Children’s Product Certificate is your written statement that a kids’ product meets federal safety rules.",
+            q: "Do you have a Children’s Product Certificate for each kids’ product?",
+            why: "Anything designed mainly for kids 12 and under needs one, based on testing by a CPSC-accepted lab unless an exemption applies. It goes by size: a shirt’s kids’ sizes need it even when the adult sizes don’t.",
+            how: "CPSC’s website explains what goes on the certificate. Register as a small batch manufacturer first if you qualify.",
+            moment: "You add your first kids’ size or kids’ item.",
+          },
+          {
+            id: "gtrack",
+            title: "Permanent tracking labels on kids’ products",
+            status: "v",
+            src: [SRC.cpscTrack],
+            when: () => has("goods") && yes("kids"),
+            what: "A tracking label is a permanent mark showing who made a kids’ product, when, where, and from which batch.",
+            q: "Do your kids’ products carry permanent tracking labels?",
+            why: "Federal law requires one on every children’s product, and there’s no exemption for home crafters.",
+            how: "Use sewn-in labels or permanent printing. Hangtags and stickers don’t count.",
+            moment: "You make your first kids’ item.",
+          },
+          {
+            id: "gsmall",
+            title: "Small batch manufacturer registration",
+            status: "v",
+            src: [SRC.cpscBatch],
+            when: () => has("goods") && yes("kids"),
+            what: "Small batch registration is a free CPSC registration that can reduce lab testing for small makers of kids’ products.",
+            q: "Are you registered with the CPSC as a small batch manufacturer?",
+            why: "Registration can spare you some third-party lab testing. Lead-in-paint and small-parts tests always need a lab, and you still issue a certificate.",
+            how: "Register each calendar year on the CPSC registry. You qualify if your revenue is under the yearly cap and you made no more than 7,500 units of the product last year.",
+            moment: "Before you pay for lab testing.",
+          },
+          {
+            id: "gdraw",
+            title: "No drawstrings on kids’ hoods and necks",
+            status: "v",
+            optional: true,
+            src: [SRC.cpscDraw],
+            when: () => has("goods") && yes("kids") && yes("clothing"),
+            what: "The drawstring rule bans cords at the hood and neck of kids’ jackets and hoodies.",
+            q: "Are your kids’ hoodies and jackets free of hood and neck drawstrings?",
+            why: "Hood and neck drawstrings are banned on kids’ upper outerwear in sizes 2T to 12.",
+            how: "Use snaps, elastic, or no closure instead.",
+            moment: "You design a kids’ hoodie.",
+          },
+          {
+            id: "gsleep",
+            title: "Kids’ sleepwear standards",
+            status: "v",
+            optional: true,
+            src: [SRC.cpscCloth],
+            when: () => has("goods") && yes("kids") && yes("clothing"),
+            what: "Kids’ sleepwear has its own, stricter flammability standards.",
+            q: "If you make kids’ pajamas, do they meet the sleepwear flammability standards?",
+            why: "Kids’ sleepwear falls under 16 CFR 1615 and 1616, which are much stricter than the rule for everyday clothing.",
+            how: "Check CPSC’s sleepwear guidance before you sell pajamas.",
+            moment: "A customer asks for matching family pajamas.",
+          },
+          {
+            id: "gdecor",
+            title: "Decorations on kids’ items checked",
+            status: "n",
+            when: () => has("goods") && yes("kids") && yes("decor"),
+            what: "Decorations are anything on a kids’ item besides plain fabric or paper.",
+            q: "Have you checked the testing rules for paint, vinyl, rhinestones, snaps, or buttons on kids’ items?",
+            why: "These aren’t plain fabric or paper, so they may need lead or phthalate testing.",
+            how: "Ask your suppliers for test reports, and check CPSC guidance.",
+            moment: "You add vinyl or rhinestones to a kids’ tee.",
+          },
+          {
+            id: "gjewel",
+            title: "Kids’ metal jewelry lab-tested",
+            status: "p",
+            when: () => has("goods") && yes("kids") && yes("kidjewel"),
+            what: "Children’s metal jewelry has its own federal testing requirements.",
+            q: "Has your kids’ metal jewelry been tested by a CPSC-accepted lab?",
+            why: "Children’s metal jewelry is excluded from small batch testing relief, so lab testing is required no matter how small your business is.",
+            how: "Find a CPSC-accepted lab before you sell.",
+            moment: "You add kids’ bracelets or earrings.",
+          },
+          {
+            id: "gbooks",
+            title: "Children’s book rules",
+            status: "p",
+            when: () => has("goods") && yes("kids") && yes("kidbooks"),
+            what: "Children’s books are children’s products under federal law, with some exemptions.",
+            q: "Do you know which federal rules apply to your children’s books?",
+            why: "Ordinary paper books are exempt from third-party testing. Books with plastic, plush, or play parts are not. Whether tracking labels still apply is unresolved.",
+            how: "Keep your book plain paper and ink unless you’re ready for testing.",
+            moment: "You plan a touch-and-feel or novelty book.",
+          },
+          {
+            id: "gcandle",
+            title: "Candle labeling and safety",
+            status: "n",
+            when: () => has("goods") && yes("candles"),
+            what: "Candle labeling covers the safety warnings and information on candles and wax melts.",
+            q: "Do your candles and wax melts carry fire-safety warnings and labeling?",
+            why: "Candles have their own labeling and fire-safety expectations.",
+            how: "Sourcing in progress.",
+            moment: "Your first candle batch.",
+          },
+          {
+            id: "gfood",
+            title: "Food-contact items checked",
+            status: "n",
+            when: () => has("goods") && yes("foodcontact"),
+            what: "Food-contact items are anything that touches food or drink, like mugs, plates, and cutting boards.",
+            q: "Have you checked the rules for items that touch food or drink?",
+            why: "These items also fall under FDA food-contact rules, and lead in pottery glaze is a known risk.",
+            how: "Sourcing in progress.",
+            moment: "You sell your first mug or cutting board.",
+          },
+          {
+            id: "autoins",
+            title: "Auto insurance covers business use",
+            status: "r",
+            pro: "an insurance broker",
+            when: () => has("trade") && yes("car"),
+            what: "Commercial auto coverage protects a vehicle you use for work.",
+            q: "Does your auto insurance cover driving for work?",
+            why: "Personal auto policies may not cover business use.",
+            how: "Ask your insurer or a broker whether your policy covers work driving.",
+            moment: "You drive to jobs with tools and materials.",
+          },
+          {
+            id: "workers",
+            title: "Helpers classified correctly",
+            status: "n",
+            when: () =>
+              (has("trade") || has("pro") || has("othersvc")) && yes("helpers"),
+            what: "Worker classification decides whether someone who helps you is an independent contractor or an employee.",
+            q: "Do you know whether your helpers count as contractors or employees?",
+            why: "The answer decides whether you owe payroll taxes and insurance, and getting it wrong is expensive. How much you pay someone doesn’t decide it.",
+            how: "If a helper is a contractor and you pay them $2,000 or more in a year, you file a Form 1099-NEC for them. That threshold was $600 before 2026 and will adjust for inflation after. A 1099 is a reporting step; it doesn’t make someone a contractor. Ask a CPA before you pay a helper regularly.",
+            moment: "You bring the same helper on jobs every week.",
+          },
+          {
+            id: "ownership",
+            title: "Who owns the work, in writing",
+            status: "n",
+            when: () => has("pro") && yes("creative"),
+            what: "Ownership terms say who owns the designs, photos, video, or writing you deliver.",
+            q: "Do your contracts say who owns the work you deliver and whether you can show it in your portfolio?",
+            why: "Without it in writing, ownership of creative work can be disputed.",
+            how: "Add ownership and portfolio-use terms to your client agreement.",
+            moment: "A client asks for your original files.",
+          },
+          {
+            id: "releases",
+            title: "Model and talent releases",
+            status: "n",
+            when: () => has("pro") && yes("people"),
+            what: "A release is a signed permission to use someone’s image.",
+            q: "Do you get signed releases from the people you photograph or film?",
+            why: "A release gives you permission to use someone’s image, including in your own marketing.",
+            how: "Sourcing in progress.",
+            moment: "You want to post a client shoot on Instagram.",
+          },
+          {
+            id: "cdata",
+            title: "Client information kept safe",
+            status: "n",
+            when: () => has("pro") && yes("data"),
+            what: "Client data is any personal or financial information you hold for clients.",
+            q: "Do you have a plan for storing clients’ personal or financial information?",
+            why: "Client data you hold is your responsibility if it leaks.",
+            how: "Sourcing in progress.",
+            moment: "A client sends you bank statements or ID.",
+          },
+        ],
+        run: [
+          {
+            id: "frecords",
+            title: "Sales tracked against the cottage food cap",
+            status: "v",
+            src: [SRC.mdardSell],
+            when: () => has("food"),
+            what: "The cottage food cap is the most you can sell in a year under the exemption: $50,000 in gross sales, or $75,000 if products sell for $250 or more each.",
+            q: "Do you track your sales against the cottage food cap?",
+            why: "MDARD can ask to see your sales records.",
+            how: "Keep a simple sales log. If two people in your home each run their own cottage food business, each gets the full cap.",
+            moment: "You get close to the cap.",
+          },
+          {
+            id: "cexempt",
+            title: "Federal cosmetics small business exemption",
+            status: "p",
+            src: [SRC.fdaSmall],
+            when: () => has("cos"),
+            what: "MoCRA, the federal cosmetics law, exempts small businesses from some FDA requirements.",
+            q: "Do you know which federal cosmetics requirements apply to a business your size?",
+            why: "Businesses averaging under $1 million a year in U.S. cosmetic sales are exempt from FDA facility registration and product listing. They still must report serious reactions to the FDA within 15 business days.",
+            how: "The exemption doesn’t cover products used near the eyes, or products that change appearance for more than 24 hours.",
+            moment: "Your sales grow, or you add an eye product.",
+            alert: () =>
+              yes("eye")
+                ? "You said you make eye-area products. Those aren’t covered by the small business exemption."
+                : "",
+          },
+        ],
+      };
+      Object.entries(EXTRA).forEach(([k, items]) => {
+        LEVELS[k].items.push(...items);
+      });
+
+      /* Categories and follow-up questions */
+      const CATS = [
+        {
+          k: "food",
+          label: "Food & drinks",
+          ex: "Baked goods, jams, candy, snacks",
+        },
+        {
+          k: "cos",
+          label: "Body & beauty products",
+          ex: "Lotions, soap, lip balm, perfume",
+        },
+        {
+          k: "goods",
+          label: "Physical goods",
+          ex: "Candles, clothing, jewelry, books, decor",
+        },
+        {
+          k: "trade",
+          label: "Home & trade services",
+          ex: "Cleaning, lawn care, handyman, painting, remodeling",
+        },
+        {
+          k: "pro",
+          label: "Professional & creative services",
+          ex: "Consulting, bookkeeping, design, photography, events",
+        },
+        {
+          k: "othersvc",
+          label: "Other services",
+          ex: "Beauty, body art, catering, child care, pet care",
+        },
+      ];
+      const FOLLOW = [
+        {
+          cat: "food",
+          k: "fridge",
+          q: "Do any of your products need refrigeration, or are any canned or pickled?",
+        },
+        {
+          cat: "food",
+          k: "kitchen",
+          q: "Do you cook anywhere besides your own home kitchen?",
+          hint: "A rented commercial kitchen, a friend’s house, a church kitchen",
+        },
+        {
+          cat: "food",
+          k: "stores",
+          q: "Do you sell to stores, cafés, or on consignment?",
+        },
+        {
+          cat: "food",
+          k: "cater",
+          q: "Do you cater or serve plated food at events?",
+        },
+        { cat: "food", k: "pets", q: "Do you make pet treats?" },
+        {
+          cat: "cos",
+          k: "claims",
+          q: "Do your labels, website, or posts say a product treats, heals, soothes, or relieves anything, or does any product contain SPF?",
+          hint: "Acne, eczema, pain, anxiety, sleep, infections",
+        },
+        { cat: "cos", k: "soap", q: "Do you make soap?" },
+        {
+          cat: "cos",
+          k: "eye",
+          q: "Do you make anything used around the eyes, like eyeliner, mascara, or lash adhesive?",
+        },
+        { cat: "goods", k: "clothing", q: "Do you make clothing?" },
+        {
+          cat: "goods",
+          k: "kids",
+          q: "Is anything you make designed for kids 12 and under?",
+          hint: "Kids’ sizes, toys, kids’ books, kids’ jewelry",
+        },
+        {
+          cat: "goods",
+          k: "decor",
+          q: "Do any of your kids’ items have paint, vinyl, rhinestones, snaps, or buttons?",
+          show: () => yes("kids"),
+        },
+        {
+          cat: "goods",
+          k: "kidjewel",
+          q: "Do you make metal jewelry for kids?",
+          show: () => yes("kids"),
+        },
+        {
+          cat: "goods",
+          k: "kidbooks",
+          q: "Do you make children’s books?",
+          show: () => yes("kids"),
+        },
+        { cat: "goods", k: "candles", q: "Do you make candles or wax melts?" },
+        {
+          cat: "goods",
+          k: "foodcontact",
+          q: "Do any of your products touch food or drink?",
+          hint: "Mugs, plates, cutting boards",
+        },
+        {
+          cat: "trade",
+          k: "build",
+          q: "Do you do construction, remodeling, roofing, painting, or repair work on homes?",
+        },
+        {
+          cat: "trade",
+          k: "over600",
+          q: "Do any of your jobs total $600 or more, counting materials?",
+          show: () => yes("build"),
+        },
+        {
+          cat: "trade",
+          k: "car",
+          q: "Do you use your personal vehicle for work?",
+        },
+        {
+          cat: "trade",
+          k: "materials",
+          q: "Do you bill clients for materials?",
+        },
+        {
+          cat: "pro",
+          k: "creative",
+          q: "Do you create work you hand over to clients, like designs, photos, video, or writing?",
+        },
+        { cat: "pro", k: "people", q: "Do you photograph or film people?" },
+        {
+          cat: "pro",
+          k: "prints",
+          q: "Do you sell prints, albums, or other products too?",
+        },
+        {
+          cat: "pro",
+          k: "taxprep",
+          q: "Do you prepare tax returns or handle client money?",
+        },
+        {
+          cat: "pro",
+          k: "data",
+          q: "Do you keep clients’ personal or financial information?",
+        },
+        {
+          cat: "svc",
+          k: "helpers",
+          q: "Do you bring in helpers, even occasionally?",
+        },
+      ];
+      const STATUS_TAG = {
+        p: "Draft, not yet verified",
+        n: "Draft, not yet verified",
+        r: "Draft, not yet verified",
+      };
+      function draftTag(it) {
+        return STATUS_TAG[it.status]
+          ? `<span class="draft">${STATUS_TAG[it.status]}</span>`
+          : "";
+      }
+      function srcHTML(it) {
+        const parts = [];
+        if (it.src && it.src.length)
+          parts.push(
+            "Source: " +
+              it.src
+                .map(
+                  (s) =>
+                    `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`,
+                )
+                .join(", ") +
+              " (checked 10/5/26)",
+          );
+        if (it.pro) parts.push(`Confirm this with ${it.pro}.`);
+        return parts.length ? `<p class="src">${parts.join(" ")}</p>` : "";
+      }
+      function alertHTML(it) {
+        const a = it.alert ? it.alert() : "";
+        return a ? `<p class="alert">${a}</p>` : "";
+      }
+      function outOfScope() {
+        const out = [];
+        if (has("food") && yes("cater"))
+          out.push(
+            "Catering and plated food are food service, which needs a license. That path isn’t in the quest yet.",
+          );
+        if (has("food") && yes("pets"))
+          out.push(
+            "Pet treats are regulated by MDARD as animal feed, not cottage food. That path isn’t in the quest yet.",
+          );
+        if (has("othersvc"))
+          out.push(
+            "Beauty, body art, food service, and care services each have their own state licensing. Those paths are coming; until then, check with LARA or your local health department.",
+          );
+        return out;
+      }
+
+      /* Plain-language definitions (drafts to test with real people) */
+      const WHAT = {
+        entity:
+          "A legal business entity, like an LLC, is a separate legal “person” you create by filing paperwork with the state.",
+        dba: "An assumed name, or DBA for “doing business as,” is a registration that lets you operate under a name other than your legal name.",
+        ein: "An EIN is your business’s federal tax ID number, a bit like a Social Security number for the business.",
+        annual:
+          "An annual filing is a yearly report you send the state to confirm your entity is still active and in good standing.",
+        license:
+          "A business license or permit is permission to operate, issued by your city, county, or a licensing board.",
+        bank: "A business checking account is a bank account used only for business income and expenses, separate from your personal money.",
+        pay: "A payment platform, like Stripe or Wave, lets customers pay you by card or bank transfer and keeps a record of every payment.",
+        tax: "Quarterly estimated taxes are payments you send the IRS and the state four times a year, because no employer is withholding tax from your income.",
+        bplan:
+          "A business plan is a written explanation of who you serve, what you sell, how you make money, and where you’re headed.",
+        pricing:
+          "A pricing model is your written rule for what you charge and why, such as a simple rate card.",
+        proj: "Financial projections are a spreadsheet forecast of the money you expect to bring in and spend over the next 12 months.",
+        contract:
+          "A written agreement spells out what each side will do, what gets paid, and what happens if something goes wrong.",
+        review:
+          "An attorney review means a licensed lawyer reads your contract and checks that it works under your state’s law.",
+        change:
+          "A change order process is a written way to handle requests that go beyond the original scope, with the extra price agreed before the work starts.",
+        sub: "A subcontractor agreement is a contract with a freelancer or contractor you hire, covering what they do, how they’re paid, and who owns the work.",
+        gl: "General liability insurance covers claims that your business injured someone or damaged their property.",
+        eo: "Professional liability insurance, also called errors and omissions (E&amp;O), covers claims that your advice or work caused a client a financial loss.",
+        tm: "A trademark search checks whether someone else already has legal rights to a name or logo similar to yours.",
+        atty: "Having a business attorney identified means you already know which lawyer you would call, before a problem forces the choice.",
+        det: "An IRS determination letter is the official letter confirming your organization is recognized as tax-exempt under 501(c)(3).",
+        f990: "Form 990 is the yearly information return that tax-exempt organizations file with the IRS, and it’s public.",
+        board:
+          "A nonprofit board is the group of people legally responsible for governing the organization, with officers like a Chair, Secretary, and Treasurer.",
+        pkg: "A grant readiness package is the set of core documents most funders ask for, kept current and in one place.",
+        uei: "A Unique Entity ID (UEI) is the identifier the federal government assigns when you register in SAM.gov. It replaced the DUNS number for federal awards in April 2022.",
+      };
+      Object.values(LEVELS).forEach((l) =>
+        l.items.forEach((it) => {
+          it.what = it.what || WHAT[it.id];
+        }),
+      );
+      const PTS = { done: 10, progress: 5, not: 0, unsure: 0 };
+      const LABEL = {
+        done: "In place",
+        progress: "In progress",
+        not: "Not yet",
+        unsure: "Not sure",
+        na: "Doesn’t apply",
+      };
+
+      const state = {
+        cats: [],
+        f: {},
+        structure: null,
+        situation: null,
+        answers: {},
+        idx: 0,
+        queue: [],
+        order: [],
+        screen: "start",
+      };
+      const $ = (s) => document.querySelector(s);
+      const app = $("#app");
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      function levelOrder() {
+        return ["decide", "form", "money", "sell", "run"];
+      }
+      function buildQueue() {
+        state.order = levelOrder();
+        state.queue = state.order.flatMap((k) =>
+          LEVELS[k].items
+            .filter(
+              (it) => !(it.skipFor && it.skipFor.includes(state.structure)),
+            )
+            .filter((it) => !it.when || it.when())
+            .map((it) => ({ ...it, level: k })),
+        );
+        state.order = state.order.filter((k) =>
+          state.queue.some((x) => x.level === k),
+        );
+      }
+      function howText(it) {
+        return state.structure === "sole" && it.howSole ? it.howSole : it.how;
+      }
+      function qText(it) {
+        return it.q;
+      }
+      function titleText(it) {
+        return it.title;
+      }
+      function whatText(it) {
+        return it.what;
+      }
+      function maxXP() {
+        return (
+          10 * state.queue.filter((it) => state.answers[it.id] !== "na").length
+        );
+      }
+      function xpTotal() {
+        return Object.values(state.answers).reduce(
+          (s, a) => s + (PTS[a] || 0),
+          0,
+        );
+      }
+      function levelFrac(k) {
+        const ans = state.queue
+          .filter((x) => x.level === k)
+          .map((it) => state.answers[it.id])
+          .filter((a) => a && a !== "na");
+        if (!ans.length) return null;
+        return ans.reduce((s, a) => s + PTS[a], 0) / (10 * ans.length);
+      }
+      function levelCounts(k) {
+        const ans = state.queue
+          .filter((x) => x.level === k)
+          .map((it) => state.answers[it.id])
+          .filter((a) => a && a !== "na");
+        return {
+          done: ans.filter((a) => a === "done").length,
+          total: ans.length,
+        };
+      }
+      function levelsForCompass() {
+        return state.order.map((k) => ({
+          key: k,
+          short: LEVELS[k].short,
+          frac: levelFrac(k),
+          ...levelCounts(k),
+        }));
+      }
+      function stageNote(k) {
+        if (k === "form") {
+          if (state.structure === "sole")
+            return "You said you’re a sole proprietor, so this stage skips forming an entity. The trade-off: with no formal entity, your personal and business finances are legally the same thing. An LLC adds that separation, and you can form one later.";
+          if (state.structure === "unsure")
+            return "Not sure which structure fits? The usual options are sole proprietor (no legal protection), LLC (the most common for small businesses), and S-Corp or C-Corp (for investors or multiple owners). A business attorney and a CPA can help you choose.";
+        }
+        if (k === "run" && state.structure === "sole") return "";
+        return "";
+      }
+      function setXP() {
+        $("#xp").textContent =
+          state.screen === "start" || state.screen === "follow"
+            ? ""
+            : xpTotal() + " of " + maxXP() + " XP";
+      }
+
+      /* ---------- Compass ---------- */
+      function compassInner(levels, o) {
+        const N = levels.length,
+          cx = 180,
+          cy = 180,
+          rMax = 122,
+          rMin = 18,
+          grow = o.grow ?? 1;
+        const pt = (a, r) => [cx + r * Math.sin(a), cy - r * Math.cos(a)];
+        const f = (p) => p[0].toFixed(1) + "," + p[1].toFixed(1);
+        let s = `<circle cx="${cx}" cy="${cy}" r="${rMax + 12}" fill="none" stroke="#7E93AB" stroke-width="2"/>`;
+        levels.forEach((lv, i) => {
+          const a = (2 * Math.PI * i) / N,
+            th = Math.min(0.42, (Math.PI / N) * 0.62);
+          const kite = (r) => {
+            const sr = r * 0.34;
+            return { tip: pt(a, r), l: pt(a - th, sr), r: pt(a + th, sr) };
+          };
+          const g = kite(rMax);
+          s += `<polygon points="${f(g.tip)} ${f(g.r)} ${cx},${cy} ${f(g.l)}" fill="none" stroke="#7E93AB" stroke-width="1.6" stroke-dasharray="4 4"/>`;
+          if (lv.frac != null) {
+            const r = rMin + (rMax - rMin) * lv.frac * grow,
+              k = kite(r);
+            s += `<polygon points="${f(k.tip)} ${f(k.l)} ${cx},${cy}" fill="var(--teal)"/>`;
+            s += `<polygon points="${f(k.tip)} ${f(k.r)} ${cx},${cy}" fill="var(--teal-deep)"/>`;
+          }
+          if (o.labels) {
+            const lp = pt(a, rMax + 30),
+              sn = Math.sin(a);
+            const anchor = sn > 0.3 ? "start" : sn < -0.3 ? "end" : "middle";
+            const sub = lv.total ? `${lv.done} of ${lv.total}` : "";
+            s += `<text x="${lp[0].toFixed(1)}" y="${lp[1].toFixed(1)}" text-anchor="${anchor}" fill="var(--ink)" font-size="13" font-weight="700" font-family="Inter,system-ui,sans-serif">${lv.short}<tspan x="${lp[0].toFixed(1)}" dy="15" font-weight="500" fill="var(--muted)" font-size="12">${sub}</tspan></text>`;
+          }
+        });
+        return s;
+      }
+      function compassSVG(levels, o) {
+        const vb = o.labels ? "-40 0 440 360" : "38 38 304 304";
+        return `<svg viewBox="${vb}" role="img" aria-label="Readiness compass: each point grows as more foundations are in place">${compassInner(levels, o)}</svg>`;
+      }
+
+      /* ---------- Screens ---------- */
+      function renderStart() {
+        state.screen = "start";
+        setXP();
+        const s = state.situation,
+          st = state.structure;
+        const cur = { situation: s, structure: st };
+        const opt = (group, val, label) =>
+          `<button class="opt" data-g="${group}" data-v="${val}" aria-pressed="${cur[group] === val}">${label}</button>`;
+        const cat = (c) =>
+          `<button class="opt" data-c="${c.k}" aria-pressed="${has(c.k)}">${c.label}<small>${c.ex}</small></button>`;
+        const ready = state.cats.length && s && st;
+        app.innerHTML = `
+  <div class="grid">
+    <div>
+      <h1>Find what your business is missing before someone asks for it.</h1>
+      <p class="lead">Each step explains what the thing is and why you need it, then asks where you stand. You’ll get a map of your foundations and the three moves to make first. Built around Michigan requirements.</p>
+      <div class="panel">
+        <fieldset><legend>What do you sell? Pick all that apply.</legend>
+          <div class="choices cols">${CATS.map(cat).join("")}</div></fieldset>
+        <fieldset><legend>How is your business set up?</legend>
+          <div class="choices cols">${opt("structure", "sole", "Sole proprietor")}${opt("structure", "entity", "LLC or corporation")}${opt("structure", "unsure", "Not formed yet, or not sure")}</div></fieldset>
+        <fieldset><legend>Where are you right now?</legend>
+          <div class="choices cols">${opt("situation", "starting", "Just starting")}${opt("situation", "selling", "Already selling")}${opt("situation", "funding", "Going after funding")}</div></fieldset>
+        <button class="btn" id="go" ${ready ? "" : "disabled"}>Next</button>
+      </div>
+    </div>
+  </div>`;
+        app.querySelectorAll("[data-g]").forEach((b) =>
+          b.addEventListener("click", () => {
+            state[b.dataset.g] = b.dataset.v;
+            renderStart();
+          }),
+        );
+        app.querySelectorAll("[data-c]").forEach((b) =>
+          b.addEventListener("click", () => {
+            const k = b.dataset.c;
+            state.cats = has(k)
+              ? state.cats.filter((x) => x !== k)
+              : [...state.cats, k];
+            renderStart();
+            const again = app.querySelector(`[data-c="${k}"]`);
+            if (again) again.focus();
+          }),
+        );
+        const go = $("#go");
+        if (go)
+          go.addEventListener("click", () => {
+            state.f = {};
+            renderFollowups();
+            window.scrollTo(0, 0);
+          });
+      }
+
+      function followList() {
+        const svc = has("trade") || has("pro") || has("othersvc");
+        return FOLLOW.filter(
+          (q) => (q.cat === "svc" ? svc : has(q.cat)) && (!q.show || q.show()),
+        );
+      }
+      function renderFollowups(focusKey) {
+        state.screen = "follow";
+        setXP();
+        const qs = followList();
+        const names = {
+          food: "Food & drinks",
+          cos: "Body & beauty",
+          goods: "Physical goods",
+          trade: "Home & trade services",
+          pro: "Professional & creative services",
+          svc: "Services",
+        };
+        let last = "",
+          html = "";
+        qs.forEach((q) => {
+          if (q.cat !== last) {
+            html += `<p class="catlabel">${names[q.cat]}</p>`;
+            last = q.cat;
+          }
+          const v = state.f[q.k];
+          html += `<div class="fq"><p>${q.q}</p>${q.hint ? `<p class="hint">${q.hint}</p>` : ""}
+      <div class="yn"><button class="opt" data-k="${q.k}" data-v="1" aria-pressed="${v === true}">Yes</button><button class="opt" data-k="${q.k}" data-v="0" aria-pressed="${v === false}">No</button></div></div>`;
+        });
+        app.innerHTML = `
+  <div class="grid">
+    <div>
+      <h2>A few questions about what you sell</h2>
+      <p class="lead">Your answers decide which steps show up in your quest. Skip any you’re unsure of; a skipped question counts as no.</p>
+      <div class="panel">
+        ${qs.length ? html : "<p>No extra questions for what you picked.</p>"}
+        <p style="margin-top:18px"><button class="btn" id="start">Start the quest</button> <button class="link" id="back">Back</button></p>
+      </div>
+    </div>
+  </div>`;
+        app.querySelectorAll("[data-k]").forEach((b) =>
+          b.addEventListener("click", () => {
+            const k = b.dataset.k;
+            state.f[k] = b.dataset.v === "1";
+            if (k === "kids" && !state.f.kids) {
+              ["decor", "kidjewel", "kidbooks"].forEach(
+                (x) => delete state.f[x],
+              );
+            }
+            if (k === "build" && !state.f.build) {
+              delete state.f.over600;
+            }
+            renderFollowups(k);
+          }),
+        );
+        if (focusKey) {
+          const b = app.querySelector(
+            `[data-k="${focusKey}"][aria-pressed="true"]`,
+          );
+          if (b) b.focus();
+        }
+        $("#back").addEventListener("click", () => {
+          renderStart();
+        });
+        $("#start").addEventListener("click", () => {
+          buildQueue();
+          state.answers = {};
+          state.idx = 0;
+          renderQuestion();
+          window.scrollTo(0, 0);
+        });
+      }
+
+      function renderQuestion() {
+        state.screen = "quest";
+        setXP();
+        const it = state.queue[state.idx],
+          lv = LEVELS[it.level],
+          ans = state.answers[it.id];
+        const lvQs = state.queue.filter((x) => x.level === it.level),
+          pos = lvQs.indexOf(it) + 1;
+        const btn = (v, label, cls = "") =>
+          `<button class="opt ${cls}" data-a="${v}" aria-pressed="${ans === v}" ${ans ? "disabled" : ""}>${label}</button>`;
+        let reveal = "";
+        if (ans) {
+          const last = state.idx === state.queue.length - 1;
+          const nextLabel =
+            lvQs[lvQs.length - 1] === it
+              ? "Finish this level"
+              : "Next question";
+          if (ans === "done") {
+            reveal = `<div class="reveal" aria-live="polite"><p class="win">+10 XP. This one’s in place.</p>
+        <p>Keep the proof handy. People usually ask for it when this happens: ${it.moment.charAt(0).toLowerCase() + it.moment.slice(1)}</p>
+        <button class="btn" id="next">${nextLabel}</button> <button class="link" id="change">Change answer</button></div>`;
+          } else if (ans === "na") {
+            reveal = `<div class="reveal" aria-live="polite"><p>Skipped. It won’t count for or against you.</p>
+        <button class="btn" id="next">${nextLabel}</button> <button class="link" id="change">Change answer</button></div>`;
+          } else {
+            const pre =
+              ans === "unsure"
+                ? `<p class="win">Good to know where the blind spots are. Here’s what it takes.</p>`
+                : ans === "progress"
+                  ? `<p class="win">+5 XP. Here’s what finishing looks like.</p>`
+                  : `<p class="win">Here’s what it takes.</p>`;
+            reveal = `<div class="reveal" aria-live="polite">${pre}<dl>
+        <dt>What it takes</dt><dd>${howText(it)}</dd>
+        <dt>When it usually comes up</dt><dd class="moment">${it.moment}</dd></dl>
+        ${srcHTML(it)}
+        <button class="btn" id="next">${nextLabel}</button> <button class="link" id="change">Change answer</button></div>`;
+          }
+        }
+        app.innerHTML = `
+  <div class="grid quest">
+    <div class="panel">
+      <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${state.queue.length}" aria-valuenow="${state.idx + (ans ? 1 : 0)}"><i style="width:${(((state.idx + (ans ? 1 : 0)) / state.queue.length) * 100).toFixed(1)}%"></i></div>
+      <div class="where">${lv.name}, question ${pos} of ${lvQs.length}</div>
+      ${pos === 1 && stageNote(it.level) ? `<p class="note">${stageNote(it.level)}</p>` : ""}
+      ${draftTag(it)}
+      <h2 class="itemtitle">${titleText(it)}</h2>
+      <dl class="explain"><dt>What it is</dt><dd>${whatText(it)}</dd><dt>Why you need it</dt><dd>${it.why}</dd></dl>
+      ${alertHTML(it)}
+      <p class="q2">${qText(it)}</p>
+      <div class="answers">${btn("done", "In place")}${btn("progress", "In progress")}${btn("not", "Not yet")}${btn("unsure", "Not sure", "unsure")}</div>
+      ${it.optional && !ans ? `<button class="link" data-a="na">Doesn’t apply to me</button>` : ""}
+      ${reveal}
+    </div>
+    <aside class="side" aria-label="Your readiness compass">${compassSVG(levelsForCompass(), { labels: false })}<small>Your compass grows as you answer.</small></aside>
+  </div>`;
+        app.querySelectorAll("[data-a]").forEach((b) =>
+          b.addEventListener("click", () => {
+            state.answers[it.id] = b.dataset.a;
+            renderQuestion();
+            const n = $("#next");
+            if (n) n.focus();
+          }),
+        );
+        const n = $("#next");
+        if (n)
+          n.addEventListener("click", () => {
+            const lastInLevel = lvQs[lvQs.length - 1] === it;
+            if (lastInLevel) renderLevelDone(it.level);
+            else {
+              state.idx++;
+              renderQuestion();
+              window.scrollTo(0, 0);
+            }
+          });
+        const c = $("#change");
+        if (c)
+          c.addEventListener("click", () => {
+            delete state.answers[it.id];
+            renderQuestion();
+          });
+      }
+
+      function renderLevelDone(k) {
+        state.screen = "level";
+        setXP();
+        const lv = LEVELS[k],
+          c = levelCounts(k),
+          i = state.order.indexOf(k),
+          lastLevel = i === state.order.length - 1;
+        const nextName = lastLevel ? "" : LEVELS[state.order[i + 1]].name;
+        app.innerHTML = `
+  <div class="grid quest">
+    <div class="panel">
+      <div class="where">Level complete</div>
+      <h2>${lv.name}</h2>
+      <p class="lead" style="font-size:20px">${c.total ? c.done + " of " + c.total + " in place." : "Skipped."}</p>
+      <p>${c.total === 0 ? "Nothing to count here, so it won’t affect your map." : c.done === c.total ? "That level is covered." : c.total - c.done + " to go on this one. The map at the end will tell you what to do first."}</p>
+      <button class="btn" id="cont">${lastLevel ? "See your map" : "Next level: " + nextName}</button>
+    </div>
+    <aside class="side" aria-label="Your readiness compass">${compassSVG(levelsForCompass(), { labels: false })}</aside>
+  </div>`;
+        window.scrollTo(0, 0);
+        $("#cont").addEventListener("click", () => {
+          if (lastLevel) renderResults();
+          else {
+            state.idx = state.queue.findIndex(
+              (x) => x.level === state.order[i + 1],
+            );
+            renderQuestion();
+          }
+        });
+      }
+
+      function renderResults() {
+        state.screen = "results";
+        setXP();
+        const all = state.queue
+          .map((it) => ({ it, a: state.answers[it.id] }))
+          .filter((x) => x.a && x.a !== "na");
+        const done = all.filter((x) => x.a === "done").length,
+          unsure = all.filter((x) => x.a === "unsure");
+        const gates =
+          state.situation === "funding"
+            ? all.filter((x) => x.it.gate && x.a !== "done")
+            : [];
+        const flagged = (x) => !!(x.it.alert && x.it.alert());
+        const rank = (x) =>
+          (gates.includes(x)
+            ? 0
+            : state.situation === "selling" && x.it.level === "sell"
+              ? 1
+              : 2) *
+            10 +
+          { unsure: 0, not: 1, progress: 2, done: 9 }[x.a];
+        const byRank = (p, q) =>
+          rank(p) - rank(q) ||
+          state.queue.indexOf(p.it) - state.queue.indexOf(q.it);
+        const todo = all.filter((x) => x.a !== "done").sort(byRank);
+        /* Next moves: at most 2 items flagged by the person's own answers, then fill to 3 with the usual order.
+     Remaining flagged items lead the "everything else" list. */
+        const MAX_FLAGGED = 2;
+        const flaggedTodo = todo.filter(flagged);
+        const top = flaggedTodo.slice(0, MAX_FLAGGED);
+        todo.forEach((x) => {
+          if (top.length < 3 && !top.includes(x) && !flagged(x)) top.push(x);
+        });
+        todo.forEach((x) => {
+          if (top.length < 3 && !top.includes(x)) top.push(x);
+        });
+        const leftover = todo.filter((x) => !top.includes(x));
+        const rest = [
+          ...leftover.filter(flagged),
+          ...leftover.filter((x) => !flagged(x)),
+        ];
+        const levels = levelsForCompass();
+
+        const hold = gates.length
+          ? `<div class="hold"><h3>Hold before you apply</h3>
+    <p style="margin:0">Funders commonly check these first. Fix them before you spend time on a proposal.</p>
+    <ul>${gates.map((g) => `<li>${titleText(g.it)} (${LABEL[g.a].toLowerCase()})</li>`).join("")}</ul></div>`
+          : "";
+        const moveHTML = top
+          .map(
+            (x, n) => `<li class="${gates.includes(x) ? "gate" : ""}">
+      <div class="tag">${LEVELS[x.it.level].name}, ${LABEL[x.a].toLowerCase()}${flagged(x) ? ", flagged by your answers" : gates.includes(x) ? ", funders check this first" : ""}</div>
+      ${draftTag(x.it)}<h3>${titleText(x.it)}</h3>
+      <p>${whatText(x.it)}</p>
+      <p>${howText(x.it)}</p>
+      <p style="color:var(--teal-text)">It usually comes up when: ${x.it.moment.charAt(0).toLowerCase() + x.it.moment.slice(1)}</p>${srcHTML(x.it)}</li>`,
+          )
+          .join("");
+        const restHTML = rest.length
+          ? `<details><summary>Everything else on your list (${rest.length})</summary><ul>${rest.map((x) => `<li>${titleText(x.it)} (${LABEL[x.a].toLowerCase()}${flagged(x) ? ", flagged by your answers" : ""})</li>`).join("")}</ul></details>`
+          : "";
+
+        app.innerHTML = `
+  <div class="results-grid">
+    <div>
+      <h1 style="max-width:18ch">${done === all.length ? "Your foundations are in place." : "Here’s your foundation map."}</h1>
+      ${hold}
+      <div class="stats">
+        <div><b>${done} of ${all.length}</b><span>foundations in place</span></div>
+        <div><b>${unsure.length}</b><span>you weren’t sure about</span></div>
+        <div><b>${xpTotal()} of ${maxXP()}</b><span>XP earned</span></div>
+      </div>
+      ${unsure.length ? `<p>The ones you weren’t sure about are the most likely to surprise you, so they come first below.</p>` : ""}
+      ${top.length ? `<h2>Your next ${top.length === 1 ? "move" : top.length + " moves"}</h2><ol class="moves">${moveHTML}</ol>` : ""}
+      ${restHTML}
+      ${
+        outOfScope().length
+          ? `<div class="note"><h3>Not covered in this quest yet</h3><ul style="margin:6px 0 0;padding-left:20px">${outOfScope()
+              .map((t) => `<li>${t}</li>`)
+              .join("")}</ul></div>`
+          : ""
+      }
+      <section class="ask" id="ask" aria-labelledby="askh">
+        <h2 id="askh">Want a copy of your foundation map?</h2>
+        <p>We’ll email you your map and your next moves, so you can work through them at your own pace.</p>
+        <div id="askbody">
+          <label class="f" for="fn">First name</label>
+          <input type="text" id="fn" autocomplete="given-name">
+          <label class="f" for="em">Email</label>
+          <input type="email" id="em" autocomplete="email">
+          <label class="chk"><input type="checkbox" id="talk"><span>I’d also like to talk through my gaps with a person.</span></label>
+          <button class="btn" id="send">Email me my map</button>
+          <p class="err" id="err" role="alert"></p>
+          <p class="fine" style="margin:0">Prototype only: nothing you type here is sent or saved.</p>
+        </div>
+      </section>
+      <p class="fine">This is a general guide, not legal, tax, or financial advice. Confirm the details for your situation with a licensed Michigan attorney, CPA, or insurance broker. Items tagged “Draft” haven’t been checked against an official source yet.</p>
+      <button class="btn" id="again">Start over</button>
+    </div>
+    <div class="map"><svg id="cmp" viewBox="-40 0 440 360" role="img" aria-label="Readiness compass showing how complete each area is"></svg></div>
+  </div>`;
+        window.scrollTo(0, 0);
+        const el = $("#cmp");
+        if (reduce) {
+          el.innerHTML = compassInner(levels, { labels: true, grow: 1 });
+        } else {
+          const t0 = performance.now();
+          (function fr(now) {
+            const t = Math.min(1, (now - t0) / 900),
+              e = 1 - Math.pow(1 - t, 3);
+            el.innerHTML = compassInner(levels, { labels: true, grow: e });
+            if (t < 1) requestAnimationFrame(fr);
+          })(t0);
+        }
+        $("#again").addEventListener("click", () => {
+          state.cats = [];
+          state.f = {};
+          state.structure = null;
+          state.situation = null;
+          renderStart();
+        });
+        ["#fn", "#em"].forEach((s) =>
+          $(s).addEventListener("input", () => {
+            $("#err").textContent = "";
+          }),
+        );
+        $("#send").addEventListener("click", () => {
+          const fn = $("#fn").value.trim(),
+            em = $("#em").value.trim(),
+            talk = $("#talk").checked;
+          if (!fn) {
+            $("#err").textContent = "Add your first name.";
+            $("#fn").focus();
+            return;
+          }
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) {
+            $("#err").textContent =
+              "Enter an email address like name@example.com.";
+            $("#em").focus();
+            return;
+          }
+          $("#askbody").innerHTML =
+            `<div class="done" role="status"><p class="win">Thanks, ${fn.replace(/[<>&"]/g, "")}.</p>
+      <p>In the real version, your map and next moves would arrive at that address${talk ? ", and someone would reach out to talk through your gaps" : ""}.</p>
+      <p class="fine" style="margin:0">Prototype only: nothing was sent or saved.</p></div>`;
+        });
+      }
+
+      /* Demo shortcut for recordings and live demos: add ?demo=start, ?demo=quest or ?demo=map to the link.
+   Loads a sample home baker who also makes candles. The tool's logic runs as normal. */
+      (function () {
+        let mode = null;
+        try {
+          mode = new URLSearchParams(location.search).get("demo");
+        } catch (e) {}
+        if (!mode) {
+          renderStart();
+          return;
+        }
+        state.cats = ["food", "goods"];
+        state.f = { candles: true };
+        state.structure = "sole";
+        state.situation = "selling";
+        if (mode === "start") {
+          renderStart();
+          return;
+        }
+        buildQueue();
+        state.answers = {};
+        state.idx = 0;
+        if (mode === "quest") {
+          state.idx = Math.max(
+            0,
+            state.queue.findIndex((x) => x.id === "fpath"),
+          );
+          renderQuestion();
+          return;
+        }
+        const done = [
+            "bplan",
+            "name",
+            "pay",
+            "pricing",
+            "fzone",
+            "flabel",
+            "fvenue",
+          ],
+          unsure = ["fpath", "salestax", "pl", "frecords"];
+        state.queue.forEach((it) => {
+          state.answers[it.id] = done.includes(it.id)
+            ? "done"
+            : unsure.includes(it.id)
+              ? "unsure"
+              : "not";
+        });
+        renderResults();
+      })();
+    </script>
+  </body>
+</html>
