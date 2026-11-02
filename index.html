@@ -315,8 +315,9 @@
     </footer>
 
     <script>
-      // Web3Forms public access key. Paste the key here (it is meant to be public).
-      const WEB3FORMS_KEY = "__WEB3FORMS_KEY__";
+      // HubSpot form that receives waitlist signups (portal 243240666, "Foundation Quest – Waitlist").
+      const HS_PORTAL = "243240666";
+      const HS_WAITLIST_FORM = "a58cf925-7557-49fb-a8ff-44ebfb7b9106";
 
       // Waitlist buttons on the pricing cards preselect the interest.
       document.querySelectorAll("[data-interest]").forEach((a) =>
@@ -337,26 +338,28 @@
           err.textContent = "Please add your first name and a valid email.";
           return;
         }
-        if (!WEB3FORMS_KEY || WEB3FORMS_KEY.startsWith("__")) {
-          err.innerHTML = 'The waitlist isn’t connected yet. Please email <a href="mailto:contact@rosewaystudio.com">contact@rosewaystudio.com</a> to join.';
-          return;
-        }
+        if (form.botcheck && form.botcheck.checked) return;
         btn.disabled = true;
-        btn.textContent = "Sending…";
-        const data = Object.fromEntries(new FormData(form).entries());
-        Object.assign(data, {
-          access_key: WEB3FORMS_KEY,
-          subject: "Foundation Quest waitlist signup",
-          from_name: "Foundation Quest site",
-        });
+        btn.textContent = "Sending\u2026";
+        const val = (id) => document.getElementById(id).value;
         try {
-          const res = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", Accept: "application/json" },
-            body: JSON.stringify(data),
-          });
-          const json = await res.json();
-          if (!json.success) throw new Error();
+          const res = await fetch(
+            `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL}/${HS_WAITLIST_FORM}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                fields: [
+                  { name: "firstname", value: name },
+                  { name: "email", value: email },
+                  { name: "fq_paid_interest", value: val("wl-interest") },
+                  { name: "fq_business_categories", value: val("wl-biz") },
+                ],
+                context: { pageUri: location.origin + "/", pageName: "Foundation Quest – waitlist" },
+              }),
+            }
+          );
+          if (!res.ok) throw new Error(String(res.status));
           const done = document.createElement("div");
           done.className = "done";
           done.setAttribute("role", "status");

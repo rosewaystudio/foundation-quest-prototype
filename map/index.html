@@ -311,6 +311,17 @@
         opacity: 0.4;
         cursor: not-allowed;
       }
+      .btn.ghost {
+        background: transparent;
+        color: #0b1e3c;
+        border: 2px solid #0b1e3c;
+        box-shadow: none;
+        margin: 0 0 18px;
+      }
+      .btn.ghost:hover:not(:disabled) {
+        background: #0b1e3c;
+        color: #ffffff;
+      }
       .link {
         font: inherit;
         background: none;
@@ -507,6 +518,14 @@
         height: auto;
       }
 
+      @media print {
+        .band .xp, .ask, #again, .skip { display: none !important; }
+        .band { background: #fff !important; }
+        .band .brand b { color: #0b1e3c !important; }
+        .ribbon { color: #333 !important; border-color: #ccc !important; }
+        body { background: #fff !important; }
+        a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 11px; }
+      }
       .ask {
         border: 1.5px solid var(--teal);
         background: var(--tint);
@@ -2515,7 +2534,8 @@
       }
       <section class="ask" id="ask" aria-labelledby="askh">
         <h2 id="askh">Want a copy of your foundation map?</h2>
-        <p>We’ll email you your map and your next moves, so you can work through them at your own pace.</p>
+        <p>Save or print it now, and we’ll also email you your next moves so you can work through them at your own pace.</p>
+        <button class="btn ghost" id="print" type="button">Save or print my map</button>
         <div id="askbody">
           <label class="f" for="fn">First name</label>
           <input type="text" id="fn" autocomplete="given-name">
@@ -2524,7 +2544,7 @@
           <label class="chk"><input type="checkbox" id="talk"><span>I’d also like to talk through my gaps with a person.</span></label>
           <button class="btn" id="send">Email me my map</button>
           <p class="err" id="err" role="alert"></p>
-          <p class="fine" style="margin:0">Prototype only: nothing you type here is sent or saved.</p>
+          <p class="fine" style="margin:0">We’ll use your email to send your map and occasional Foundation Quest updates. See our <a href="https://rosewaystudio.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
         </div>
       </section>
       <p class="fine">This is a general guide, not legal, tax, or financial advice. Confirm the details for your situation with a licensed Michigan attorney, CPA, or insurance broker. Items tagged “Draft” haven’t been checked against an official source yet.</p>
@@ -2557,7 +2577,8 @@
             $("#err").textContent = "";
           }),
         );
-        $("#send").addEventListener("click", () => {
+        $("#print").addEventListener("click", () => window.print());
+        $("#send").addEventListener("click", async () => {
           const fn = $("#fn").value.trim(),
             em = $("#em").value.trim(),
             talk = $("#talk").checked;
@@ -2572,12 +2593,64 @@
             $("#em").focus();
             return;
           }
-          $("#askbody").innerHTML =
-            `<div class="done" role="status"><p class="win">Thanks, ${fn.replace(/[<>&"]/g, "")}.</p>
-      <p>In the real version, your map and next moves would arrive at that address${talk ? ", and someone would reach out to talk through your gaps" : ""}.</p>
-      <p class="fine" style="margin:0">Prototype only: nothing was sent or saved.</p></div>`;
+          const safe = fn.replace(/[<>&"]/g, "");
+          // Demo links (?demo=...) are for recordings: never send real data.
+          if (DEMO_MODE) {
+            $("#askbody").innerHTML = `<div class="done" role="status"><p class="win">Thanks, ${safe}.</p><p class="fine" style="margin:0">Demo mode: nothing was sent.</p></div>`;
+            return;
+          }
+          const btn = $("#send");
+          btn.disabled = true;
+          btn.textContent = "Sending…";
+          const catNames = state.cats
+            .map((k) => (CATS.find((c) => c.k === k) || {}).label || k)
+            .join(", ");
+          const pct = all.length ? Math.round((done / all.length) * 100) : 0;
+          const moves = top
+            .map((x, i) => `${i + 1}. ${titleText(x.it)}`)
+            .join("\n");
+          try {
+            const res = await fetch(
+              `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL}/${HS_MAP_FORM}`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  fields: [
+                    { name: "firstname", value: fn },
+                    { name: "email", value: em },
+                    { name: "fq_business_categories", value: catNames },
+                    { name: "fq_map_progress", value: String(pct) },
+                    { name: "fq_next_moves", value: moves },
+                    { name: "fq_wants_help", value: talk ? "Yes" : "No" },
+                  ],
+                  context: {
+                    pageUri: location.href.split("?")[0],
+                    pageName: "Foundation Quest – foundation map",
+                  },
+                }),
+              },
+            );
+            if (!res.ok) throw new Error(String(res.status));
+            $("#askbody").innerHTML =
+              `<div class="done" role="status"><p class="win">Thanks, ${safe}. Check your inbox.</p>
+      <p>Your next moves are on their way${talk ? ", and we’ll reach out to set up a time to talk through your gaps" : ""}. Don’t see it in a few minutes? Check your spam folder.</p></div>`;
+          } catch (e) {
+            btn.disabled = false;
+            btn.textContent = "Email me my map";
+            $("#err").innerHTML =
+              'That didn’t go through. Please try again, or email <a href="mailto:contact@rosewaystudio.com">contact@rosewaystudio.com</a>.';
+          }
         });
       }
+
+      /* HubSpot form that receives map requests (portal 243240666, "Foundation Quest – Map request"). */
+      const HS_PORTAL = "243240666";
+      const HS_MAP_FORM = "baa7e1e3-73b4-4ac5-987a-c7ee7d5fb40a";
+      let DEMO_MODE = false;
+      try {
+        DEMO_MODE = !!new URLSearchParams(location.search).get("demo");
+      } catch (e) {}
 
       /* Demo shortcut for recordings and live demos: add ?demo=start, ?demo=quest or ?demo=map to the link.
    Loads a sample home baker who also makes candles. The tool's logic runs as normal. */
