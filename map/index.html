@@ -592,6 +592,17 @@
         padding-top: 16px;
         border-top: 1px solid var(--line);
       }
+      .askpro {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--teal-text);
+        background: var(--tint);
+        border: 1px solid var(--tint-strong);
+        border-radius: 99px;
+        padding: 2px 10px;
+        margin: 0 0 8px;
+      }
       .draft {
         display: inline-block;
         font-size: 12px;
@@ -728,9 +739,11 @@
             {
               id: "tm",
               title: "Trademark search",
+              checked: "11/1/26",
+              status: "v",
               q: "Have you searched to make sure your business name isn’t already trademarked?",
               why: "Operating under a name or logo that’s already trademarked can force a rebrand.",
-              how: "Search tmsearch.uspto.gov. It’s free and takes under 30 minutes.",
+              how: "Search the USPTO’s Trademark Search at tmsearch.uspto.gov before you commit to a name.",
               moment:
                 "You’re forced to rebrand after you’ve already printed and launched.",
             },
@@ -744,32 +757,38 @@
             {
               id: "atty",
               title: "Business attorney identified",
+              checked: "11/1/26",
+              status: "v",
               q: "Do you know which business attorney you’d call if you needed one?",
               why: "You don’t need a retainer, but you should know who you’d call before you need one, so you’re not choosing under pressure.",
-              how: "Michigan Bar Lawyer Referral Service: michbar.org.",
+              how: "The State Bar of Michigan Lawyer Referral Service, (800) 968-0738, matches you with an attorney for a first consultation of up to 25 minutes for a $25 fee.",
               moment:
                 "Something goes wrong and you’re choosing a lawyer in a hurry.",
             },
             {
               id: "entity",
               title: "Business formed with the state",
+              checked: "11/1/26",
+              status: "v",
               titleN: "Nonprofit incorporated with the state",
               gate: true,
               skipFor: ["sole"],
               q: "Is your business legally formed with the state?",
               qN: "Is your nonprofit incorporated with the state?",
               why: "Your legal structure determines how you’re taxed, how your personal assets are protected, and how contracts are written. Without a formal entity, your personal and business finances are legally the same thing.",
-              how: "File with Michigan LARA. The LLC formation fee is $50, and online processing typically takes 5 to 10 business days. The Articles must name a resident agent: a person or service with a Michigan street address that receives legal documents for the business.",
+              how: "File Articles of Organization with Michigan LARA. The filing fee is $50. The Articles must name a resident agent and the street address of the registered office, where the agent receives legal papers for the business.",
               moment:
                 "A bank, client, or funder asks for the name of your legal entity.",
             },
             {
               id: "ein",
               title: "EIN (federal tax ID)",
+              checked: "11/1/26",
+              status: "v",
               gate: true,
               q: "Do you have an EIN, your federal tax ID?",
               why: "You need it to open a business bank account, file business taxes, and apply for most grants and contracts.",
-              how: "Apply free at irs.gov. It takes about 10 minutes.",
+              how: "Apply online at irs.gov. It’s always free, and if you’re approved you get your EIN right away. Skip any site that charges for one.",
               moment:
                 "You go to open a business bank account or fill out a grant application.",
             },
@@ -796,21 +815,25 @@
             {
               id: "dba",
               title: "Assumed name (DBA) registered",
+              checked: "11/1/26",
+              status: "v",
               optional: true,
               q: "If you operate under a name different from your legal name, is it registered as a DBA?",
               why: "If you operate under a name different from your legal entity name, you need a DBA registration to open bank accounts, sign contracts, and accept payments under your operating name.",
-              how: "Sole proprietors and general partnerships file with the county clerk in each county where they do business. LLCs and corporations file a Certificate of Assumed Name with LARA, and the fee is listed as $25. County fees vary, so confirm the current fee and renewal rules before filing.",
+              how: "Sole proprietors and partnerships file with the county clerk in each county where they do business; registrations last five years, and fees vary by county. LLCs and corporations file a Certificate of Assumed Name with LARA instead.",
               howSole:
-                "File with the county clerk in each county where you do business. Fees vary by county, so confirm the current fee and renewal rules before filing.",
+                "File with the county clerk in each county where you do business. Registrations last five years, and fees vary by county.",
               moment:
                 "A bank or payment platform asks for proof that you can operate under that name.",
             },
             {
               id: "license",
               title: "Business licenses and local permits",
+              checked: "11/1/26",
+              status: "v",
               q: "Do you have the licenses and local permits your work requires?",
               why: "Depending on your business type and location, you may need a city or county business license, a professional license, or a home occupation permit.",
-              how: "Check with your city or township clerk. Detroit businesses may need a City of Detroit business license.",
+              how: "Check with your city or township clerk. Detroit licenses specific business types, such as food service, retail, vendors, and special events; check the Business License Office list.",
               moment:
                 "A venue, inspector, or city office asks to see your license.",
             },
@@ -843,9 +866,11 @@
             {
               id: "tax",
               title: "Quarterly estimated tax plan",
+              checked: "11/1/26",
+              status: "v",
               q: "Do you have a plan for quarterly estimated taxes?",
               why: "As a self-employed owner, taxes aren’t withheld automatically. You’re required to make quarterly estimated payments or face underpayment penalties.",
-              how: "A common rule of thumb is setting aside 25 to 30 percent of net profit in your business savings account for federal and state taxes. Confirm your obligation with a CPA. Michigan uses Form MI-1040ES.",
+              how: "Federal estimated payments generally apply if you expect to owe $1,000 or more. Michigan’s are due April 15, June 15, September 15, and January 15, using Form MI-1040ES. A common rule of thumb is setting aside 25 to 30 percent of net profit; confirm your amounts with a CPA.",
               moment: "A quarterly deadline passes and you owe a penalty.",
             },
           ],
@@ -886,9 +911,11 @@
             {
               id: "review",
               title: "Attorney-reviewed contract",
+              checked: "11/1/26",
+              status: "v",
               q: "Has a licensed attorney reviewed your contract?",
               why: "A contract you wrote yourself or pulled from a template hasn’t been checked for enforceability under your state’s law.",
-              how: "A 1 to 2 hour review from a Michigan business attorney typically costs $200 to $400. The Michigan Bar Lawyer Referral Service is at michbar.org.",
+              how: "Ask a Michigan business attorney for a flat-fee review before you start using the contract. The State Bar’s Lawyer Referral Service can connect you.",
               moment: "The first time the contract is actually tested.",
             },
             {
@@ -916,7 +943,7 @@
               title: "General liability insurance",
               q: "Do you have general liability insurance?",
               why: "It protects against claims of bodily injury, property damage, and certain personal injury claims. Some clients and venues require proof before engaging you.",
-              how: "Next Insurance and Hiscox offer small-business policies, often $300 to $600 a year.",
+              how: "Get quotes from an insurance broker or a small-business insurer. Prices depend on what you do and where.",
               moment: "A venue or client asks for a certificate of insurance.",
             },
             {
@@ -924,7 +951,7 @@
               title: "Professional liability (E&O) insurance",
               q: "Do you have professional liability insurance, also called E&O?",
               why: "It protects you if a client claims your advice or services caused them financial harm. For consulting and advisory work, this is the more critical coverage.",
-              how: "Expect $500 to $1,500 a year depending on revenue and scope.",
+              how: "Get quotes from an insurance broker. Prices depend on your revenue and the kind of work you do.",
               moment: "A client says your work cost them money.",
             },
           ],
@@ -937,12 +964,14 @@
             {
               id: "annual",
               title: "Annual state filing current",
+              checked: "11/1/26",
+              status: "v",
               gate: true,
               optional: true,
               skipFor: ["sole"],
               q: "Are your annual state filings up to date?",
-              why: "Michigan requires LLCs and corporations to file an Annual Statement with LARA each year to stay in good standing. If you miss it, the entity can be dissolved and your liability protection disappears.",
-              how: "For LLCs the fee is $25, due February 15 each year.",
+              why: "Michigan requires every LLC to file an Annual Statement with LARA each year, starting the year after it forms. Miss it and the LLC falls out of good standing; getting back means filing every missed statement and paying the fees.",
+              how: "For LLCs it’s due February 15 and costs $25. An LLC formed after September 30 skips the first February.",
               moment:
                 "A funder, lender, or client checks that you’re in good standing.",
             },
@@ -992,12 +1021,136 @@
       /* ---------- v1 restructure (10/5/26) ----------
    Business only: nonprofit items and the Fund stage are removed.
    Category items below come from the Foundation Quest Regulatory Reference v1.
-   status: v = verified against an official source on 10/5/26; p = partly verified; n = needs a source; r = refer to a professional.
-   Anything not "v" shows a "Draft, not yet verified" tag. */
+   status: v = verified against an official source (date in `checked`, default 10/5/26); p = partly verified; n = needs a source; r = refer to a professional.
+   p and n show a "Draft, not yet verified" tag; r shows "Ask a pro". Items with no status are general advice and show no tag. */
       delete LEVELS.fund;
       LEVELS.form.items = LEVELS.form.items.filter((it) => !it.np);
 
       const SRC = {
+        lara700: {
+          t: "LARA Articles of Organization (LLC) form",
+          u: "https://www.michigan.gov/-/media/Project/Websites/lara/cscl/Folder3/700_08-15.pd",
+        },
+        laraFaq: {
+          t: "LARA Corporations Division FAQ",
+          u: "https://www.michigan.gov/lara/bureau-list/cscl/corps/frequently-asked-questions",
+        },
+        countyDba: {
+          t: "Example county clerk assumed name rules (Saginaw County)",
+          u: "https://saginawcountymi.gov/departments/county-clerk/business-registration-assumed-names",
+        },
+        irsEin: {
+          t: "IRS: Apply for an EIN online",
+          u: "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online",
+        },
+        uspto: {
+          t: "USPTO Trademark Search",
+          u: "https://www.uspto.gov/trademark/search",
+        },
+        michbarLrs: {
+          t: "State Bar of Michigan Lawyer Referral Service",
+          u: "https://lrs.michbar.org/LRS-Info/Lawyer-Referral-Service",
+        },
+        detroitLic: {
+          t: "City of Detroit Business License Office",
+          u: "https://detroitmi.gov/license",
+        },
+        miEst: {
+          t: "Michigan Treasury: estimated payment due dates",
+          u: "https://www.michigan.gov/taxes/questions/iit/accordion/estimate/when-are-the-quarterly-estimated-tax-payments-due-1",
+        },
+        irsEst: {
+          t: "IRS: who pays estimated tax",
+          u: "https://www.irs.gov/node/99546",
+        },
+        laraBcc: {
+          t: "LARA Bureau of Construction Codes licensing",
+          u: "https://www.michigan.gov/lara/bureau-list/bcc/sections/licensing-section",
+        },
+        detroitElec: {
+          t: "Detroit BSEED electrical contractor registration",
+          u: "https://www.detroitmi.gov/Portals/0/docs/Permits/BSEED/Electrical/CURRENT%20ELECTRICAL%20CONTRACTOR%20REGISTRATION-RENEWAL%20WEB.pdf",
+        },
+        detroitTrades: {
+          t: "Detroit BSEED contractor licenses",
+          u: "https://training.detroitmi.gov/departments/buildings-safety-engineering-and-environmental-department-bseed/bseed-divisions/construction-inspection/bseed-contractor-license-application",
+        },
+        irsPtin: {
+          t: "IRS: PTIN renewal and 2026 fee",
+          u: "https://www.irs.gov/node/152101",
+        },
+        fdaAllergen: {
+          t: "FDA: Sesame, the ninth major food allergen",
+          u: "https://www.fda.gov/food/food-allergies/faster-act-sesame-ninth-major-food-allergen",
+        },
+        fdaLabelGuide: {
+          t: "FDA Cosmetic Labeling Guide",
+          u: "https://fda.gov/media/88234/download",
+        },
+        fdaMocra: {
+          t: "FDA: Modernization of Cosmetics Regulation Act",
+          u: "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022",
+        },
+        fdaRegGuide: {
+          t: "FDA guidance: cosmetic registration and listing",
+          u: "https://fda.gov/media/171688/download",
+        },
+        cpscSmallBiz: {
+          t: "CPSC: Small batch manufacturers and testing",
+          u: "https://cpsc.gov/Business--Manufacturing/Small-Business-Resources/Small-Batch-Manufacturers-and-Third-Party-",
+        },
+        cpscLead: {
+          t: "CPSC: Total lead content (ordinary books)",
+          u: "https://www.cpsc.gov/en/Business--Manufacturing/Business-Education/Lead/Total-Lead-Content",
+        },
+        ecfrLeadPaint: {
+          t: "16 CFR Part 1303: lead in paint",
+          u: "https://www.ecfr.gov/current/title-16/chapter-II/subchapter-B/part-1303",
+        },
+        cpscPhth: {
+          t: "CPSC: Phthalates business guidance",
+          u: "https://cpsc.gov/Business--Manufacturing/Business-Education/Business-Guidance/Phthalates",
+        },
+        cpscCandle: {
+          t: "CPSC: Candles business guidance",
+          u: "https://www.cpsc.gov/Business--Manufacturing/Business-Education/Business-Guidance/Candles",
+        },
+        ecfrFpla: {
+          t: "16 CFR Part 500: consumer product labeling",
+          u: "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-E/part-500",
+        },
+        fdaPottery: {
+          t: "FDA: Lead-glazed pottery Q&A",
+          u: "https://www.fda.gov/food/metals/questions-and-answers-lead-glazed-traditional-pottery",
+        },
+        fdaCpgPottery: {
+          t: "FDA CPG 545.450: pottery and lead",
+          u: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cpg-sec-545450-pottery-ceramics-import-and-domestic-lead-contamination",
+        },
+        irsWorker: {
+          t: "IRS Topic 762: contractor or employee",
+          u: "https://www.irs.gov/taxtopics/tc762",
+        },
+        irs1099: {
+          t: "IRS 2026 Instructions for Forms 1099-MISC and 1099-NEC",
+          u: "https://www.irs.gov/pub/irs-prior/i1099mec--2026.pdf",
+        },
+        copyCirc30: {
+          t: "U.S. Copyright Office Circular 30: works made for hire",
+          u: "https://www.copyright.gov/circs/circ30.pdf",
+        },
+        copy17: {
+          t: "17 U.S.C. ch. 2: copyright ownership and transfer",
+          u: "https://copyright.gov/title17/92chap2.html",
+        },
+        ftcPii: {
+          t: "FTC: Protecting Personal Information",
+          u: "https://www.ftc.gov/documents/bus69-protecting-personal-information-guide-business",
+        },
+        miBreach: {
+          t: "MCL 445.72: Michigan breach notice",
+          u: "https://ombudsman.legislature.mi.gov/documents/mcl/pdf/MCL-445-72.pdf",
+        },
         mdardFaq: {
           t: "MDARD Cottage Food FAQ",
           u: "https://www.michigan.gov/mdard/food-dairy/cottage-food/getting-started-faq",
@@ -1051,6 +1204,24 @@
           u: "https://www.michigan.gov/lara/-/media/Project/Websites/lara/bcc-media/Licensing/Residential-Builders/Builders-FAQ.pdf?rev=7e26f192aff545448c101d2ba52921c4",
         },
       };
+
+      /* Sources for the core checklist items (checked 11/1/26). Added here because SRC is defined after LEVELS. */
+      const CORE_SRC = {
+        tm: [SRC.uspto],
+        atty: [SRC.michbarLrs],
+        entity: [SRC.lara700, SRC.laraFaq],
+        ein: [SRC.irsEin],
+        dba: [SRC.countyDba, SRC.laraFaq],
+        license: [SRC.detroitLic],
+        tax: [SRC.irsEst, SRC.miEst],
+        review: [SRC.michbarLrs],
+        annual: [SRC.laraFaq],
+      };
+      Object.values(LEVELS).forEach((lvl) =>
+        lvl.items.forEach((it) => {
+          if (CORE_SRC[it.id]) it.src = CORE_SRC[it.id];
+        }),
+      );
 
       const has = (c) => state.cats.includes(c);
       const yes = (k) => !!state.f[k];
@@ -1112,37 +1283,43 @@
           {
             id: "tradelic",
             title: "Electrical, plumbing, or HVAC license",
-            status: "p",
+            checked: "11/1/26",
+            src: [SRC.laraBcc],
+            status: "v",
             optional: true,
             when: () => has("trade") && yes("build"),
             what: "Trade licenses are separate state licenses for electrical, plumbing, and mechanical (HVAC) work.",
             q: "If you do electrical, plumbing, or HVAC work, do you hold the license for that trade?",
-            why: "These trades are licensed separately from the builder and Maintenance & Alteration licenses.",
-            how: "Look up your trade’s license with LARA’s Bureau of Construction Codes.",
+            why: "Michigan licenses electrical, plumbing, and mechanical (HVAC) contractors separately from residential builder and Maintenance & Alteration licenses.",
+            how: "Look up the license for your trade with LARA’s Bureau of Construction Codes, (517) 241-9316, before you take that kind of work.",
             moment:
               "A customer asks you to swap a light fixture or a water heater.",
           },
           {
             id: "detroitreg",
             title: "City of Detroit contractor registration",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.detroitElec, SRC.detroitTrades],
+            status: "v",
             optional: true,
             when: () => has("trade") && yes("build"),
             what: "A city registration is a separate step some cities require on top of a state license.",
             q: "If you work in Detroit, have you registered with the city as a licensed contractor?",
-            why: "Detroit’s city code appears to require state-licensed contractors to register with the city’s Buildings, Safety Engineering and Environmental Department (BSEED).",
-            how: "Confirm the current requirement with BSEED before you take work in Detroit.",
+            why: "To pull electrical permits in Detroit, state-licensed electrical contractors register with the city’s Buildings, Safety Engineering and Environmental Department (BSEED). The city also licenses some trades directly, including electrical workers, boiler and refrigeration workers, and sign specialists.",
+            how: "Before you take work in Detroit, call BSEED’s Construction Division at (313) 224-3202 to confirm what your trade needs.",
             moment: "You pull a permit for a job in Detroit.",
           },
           {
             id: "ptin",
             title: "IRS tax preparer number (PTIN)",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.irsPtin],
+            status: "v",
             when: () => has("pro") && yes("taxprep"),
             what: "A PTIN is the identification number the IRS issues to people who prepare federal tax returns for pay.",
             q: "If you prepare tax returns for pay, do you have a PTIN?",
-            why: "Paid federal tax preparers need one.",
-            how: "Apply through the IRS website.",
+            why: "Anyone paid to prepare federal tax returns or refund claims needs one.",
+            how: "Apply or renew at irs.gov. The fee is $18.75 for 2026, and every PTIN expires December 31, so renew each year.",
             moment: "A bookkeeping client asks you to file their return.",
           },
         ],
@@ -1150,13 +1327,14 @@
           {
             id: "salestax",
             title: "Sales tax license",
+            checked: "11/1/26",
             status: "v",
             src: [SRC.trSales],
             when: () => isProduct() || (has("pro") && yes("prints")),
             what: "A sales tax license is a free registration with Michigan Treasury that lets you collect Michigan’s 6% sales tax and send it to the state.",
             q: "Do you have a Michigan sales tax license?",
             why: "Anyone selling physical goods to the final customer needs one. The exception: if you sell at two or fewer events a year, you can file a one-time event return (Form 5089) instead.",
-            how: "Register online through Michigan Treasury Online (MTO), or with Form 518. You can start selling before the license arrives. Licenses run January through December.",
+            how: "Register online through Michigan Treasury Online (MTO), or with Form 518. There’s no fee, and you can start selling before the license arrives. Licenses run January through December.",
             moment:
               "Your third market of the season, when the organizer asks for your license number.",
             alert: () =>
@@ -1230,12 +1408,14 @@
           {
             id: "fallergen",
             title: "Allergens named on labels",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.fdaAllergen, SRC.mdardLabel],
+            status: "v",
             when: () => has("food"),
             what: "Allergen labeling means naming any major food allergen your product contains.",
             q: "Do your labels name every major allergen your products contain?",
-            why: "Federal law lists nine major allergens: milk, eggs, fish, shellfish, tree nuts, peanuts, wheat, soybeans, and sesame. MDARD’s page still lists eight and leaves out sesame.",
-            how: "Name allergens in the ingredient list or in a “Contains” line, and name the specific tree nut, like almonds or walnuts.",
+            why: "Federal law lists nine major allergens: milk, eggs, fish, crustacean shellfish, tree nuts, peanuts, wheat, soybeans, and sesame. Sesame was added January 1, 2023.",
+            how: "Name each allergen in the ingredient list, in parentheses after an ingredient, like “tahini (sesame),” or in a “Contains” line right next to the ingredients.",
             moment: "A customer asks about allergies.",
           },
           {
@@ -1320,12 +1500,14 @@
           {
             id: "clabel",
             title: "Other cosmetic label elements",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.fdaLabelGuide, SRC.fdaSmall],
+            status: "v",
             when: () => has("cos"),
             what: "Standard cosmetic labels name the product, its net contents, and its ingredients.",
             q: "Do your labels show the product name, net contents, and a full ingredient list?",
-            why: "These are standard FDA cosmetic label elements.",
-            how: "Check FDA’s Cosmetic Labeling Guide.",
+            why: "FDA requires these on every cosmetic label.",
+            how: "Front panel: what the product is, and the net quantity near the bottom. Back or side: your business name and street address (a P.O. box or website isn’t enough), ingredients from most to least, and any warnings the product needs.",
             moment: "Your first label print.",
           },
           {
@@ -1429,56 +1611,66 @@
           {
             id: "gdecor",
             title: "Decorations on kids’ items checked",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.ecfrLeadPaint, SRC.cpscSmallBiz, SRC.cpscPhth],
+            status: "v",
             when: () => has("goods") && yes("kids") && yes("decor"),
             what: "Decorations are anything on a kids’ item besides plain fabric or paper.",
             q: "Have you checked the testing rules for paint, vinyl, rhinestones, snaps, or buttons on kids’ items?",
-            why: "These aren’t plain fabric or paper, so they may need lead or phthalate testing.",
-            how: "Ask your suppliers for test reports, and check CPSC guidance.",
+            why: "Paint and similar coatings on kids’ items must contain no more than 0.009% (90 ppm) lead, and that test has to come from a CPSC-accepted lab even for small batch makers. Plastic parts on toys and child care items also have phthalate limits.",
+            how: "Ask your suppliers for test reports on paints, vinyl, and trims, and check CPSC’s guidance for your item before you sell.",
             moment: "You add vinyl or rhinestones to a kids’ tee.",
           },
           {
             id: "gjewel",
             title: "Kids’ metal jewelry lab-tested",
-            status: "p",
+            checked: "11/1/26",
+            src: [SRC.cpscSmallBiz],
+            status: "v",
             when: () => has("goods") && yes("kids") && yes("kidjewel"),
             what: "Children’s metal jewelry has its own federal testing requirements.",
             q: "Has your kids’ metal jewelry been tested by a CPSC-accepted lab?",
             why: "Children’s metal jewelry is excluded from small batch testing relief, so lab testing is required no matter how small your business is.",
-            how: "Find a CPSC-accepted lab before you sell.",
+            how: "Use a CPSC-accepted lab, then issue a Children’s Product Certificate before you sell.",
             moment: "You add kids’ bracelets or earrings.",
           },
           {
             id: "gbooks",
             title: "Children’s book rules",
-            status: "p",
+            checked: "11/1/26",
+            src: [SRC.cpscLead],
+            status: "v",
             when: () => has("goods") && yes("kids") && yes("kidbooks"),
             what: "Children’s books are children’s products under federal law, with some exemptions.",
             q: "Do you know which federal rules apply to your children’s books?",
-            why: "Ordinary paper books are exempt from third-party testing. Books with plastic, plush, or play parts are not. Whether tracking labels still apply is unresolved.",
-            how: "Keep your book plain paper and ink unless you’re ready for testing.",
+            why: "Ordinary books, printed on paper or cardboard with standard binding, don’t need third-party testing. That relief doesn’t cover books with play value, books for kids 3 and under, or toys sold with a book.",
+            how: "Keep your book plain paper and ink unless you’re ready for testing. The exemption is from testing, not from children’s product rules, so check CPSC’s guidance.",
             moment: "You plan a touch-and-feel or novelty book.",
           },
           {
             id: "gcandle",
             title: "Candle labeling and safety",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.cpscCandle, SRC.ecfrFpla],
+            status: "v",
             when: () => has("goods") && yes("candles"),
             what: "Candle labeling covers the safety warnings and information on candles and wax melts.",
             q: "Do your candles and wax melts carry fire-safety warnings and labeling?",
-            why: "Candles have their own labeling and fire-safety expectations.",
-            how: "Sourcing in progress.",
+            why: "Federal law bans candle wicks whose metal core has more than 0.06% lead, and packaged candles need standard consumer labeling.",
+            how: "Use lead-free wicks. If you use metal-cored wicks, you need a General Certificate of Compliance. Your label needs what the product is, the net quantity, and your business name and address. Fire-safety warnings follow a voluntary standard (ASTM F2058) and are strongly recommended.",
             moment: "Your first candle batch.",
           },
           {
             id: "gfood",
             title: "Food-contact items checked",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.fdaPottery, SRC.fdaCpgPottery],
+            status: "v",
             when: () => has("goods") && yes("foodcontact"),
             what: "Food-contact items are anything that touches food or drink, like mugs, plates, and cutting boards.",
             q: "Have you checked the rules for items that touch food or drink?",
-            why: "These items also fall under FDA food-contact rules, and lead in pottery glaze is a known risk.",
-            how: "Sourcing in progress.",
+            why: "Glazes can leach lead into food and drink. FDA has action levels for lead that leaches from ceramic tableware, and it applies them to U.S.-made and imported pottery.",
+            how: "Use food-safe glazes and have finished pieces lab-tested for leachable lead before you sell them for food use.",
             moment: "You sell your first mug or cutting board.",
           },
           {
@@ -1496,46 +1688,53 @@
           {
             id: "workers",
             title: "Helpers classified correctly",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.irsWorker, SRC.irs1099],
+            status: "v",
             when: () =>
               (has("trade") || has("pro") || has("othersvc")) && yes("helpers"),
             what: "Worker classification decides whether someone who helps you is an independent contractor or an employee.",
             q: "Do you know whether your helpers count as contractors or employees?",
-            why: "The answer decides whether you owe payroll taxes and insurance, and getting it wrong is expensive. How much you pay someone doesn’t decide it.",
-            how: "If a helper is a contractor and you pay them $2,000 or more in a year, you file a Form 1099-NEC for them. That threshold was $600 before 2026 and will adjust for inflation after. A 1099 is a reporting step; it doesn’t make someone a contractor. Ask a CPA before you pay a helper regularly.",
+            why: "It decides whether you owe payroll taxes for them. The IRS looks at behavioral control, financial control, and the relationship, not what you call the person or how much you pay them.",
+            how: "If a helper is a contractor and you pay them $2,000 or more in a year, you file a Form 1099-NEC for them. That threshold was $600 before 2026 and may adjust for inflation starting in 2027. A 1099 is a reporting step; it doesn’t make someone a contractor. Unsure? IRS Form SS-8 asks the IRS to decide, and a CPA can help before you pay a helper regularly.",
             moment: "You bring the same helper on jobs every week.",
           },
           {
             id: "ownership",
             title: "Who owns the work, in writing",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.copyCirc30, SRC.copy17],
+            status: "v",
             when: () => has("pro") && yes("creative"),
             what: "Ownership terms say who owns the designs, photos, video, or writing you deliver.",
             q: "Do your contracts say who owns the work you deliver and whether you can show it in your portfolio?",
-            why: "Without it in writing, ownership of creative work can be disputed.",
-            how: "Add ownership and portfolio-use terms to your client agreement.",
+            why: "By default, the person who creates a work owns the copyright, even when a client paid for it. A transfer of ownership only counts if it’s in writing and signed.",
+            how: "Put ownership and portfolio-use terms in your client agreement. “Work made for hire” applies to commissioned work only in certain categories and only with a signed written agreement, so don’t rely on that phrase alone.",
             moment: "A client asks for your original files.",
           },
           {
             id: "releases",
             title: "Model and talent releases",
-            status: "n",
+            pro: "a Michigan attorney",
+            status: "r",
             when: () => has("pro") && yes("people"),
             what: "A release is a signed permission to use someone’s image.",
             q: "Do you get signed releases from the people you photograph or film?",
             why: "A release gives you permission to use someone’s image, including in your own marketing.",
-            how: "Sourcing in progress.",
+            how: "Have people sign a release before you use their image in marketing or sell it. Ask an attorney for a release that fits your work.",
             moment: "You want to post a client shoot on Instagram.",
           },
           {
             id: "cdata",
             title: "Client information kept safe",
-            status: "n",
+            checked: "11/1/26",
+            src: [SRC.ftcPii, SRC.miBreach],
+            status: "v",
             when: () => has("pro") && yes("data"),
             what: "Client data is any personal or financial information you hold for clients.",
             q: "Do you have a plan for storing clients’ personal or financial information?",
-            why: "Client data you hold is your responsibility if it leaks.",
-            how: "Sourcing in progress.",
+            why: "If someone gets unauthorized access to Michigan residents’ personal information you hold, Michigan law can require you to notify them.",
+            how: "Follow the FTC’s five steps: know what you have, keep only what you need, lock it down, dispose of it properly, and plan for a breach.",
             moment: "A client sends you bank statements or ID.",
           },
         ],
@@ -1555,13 +1754,14 @@
           {
             id: "cexempt",
             title: "Federal cosmetics small business exemption",
-            status: "p",
-            src: [SRC.fdaSmall],
+            checked: "11/1/26",
+            status: "v",
+            src: [SRC.fdaRegGuide, SRC.fdaMocra, SRC.fdaSmall],
             when: () => has("cos"),
             what: "MoCRA, the federal cosmetics law, exempts small businesses from some FDA requirements.",
             q: "Do you know which federal cosmetics requirements apply to a business your size?",
-            why: "Businesses averaging under $1 million a year in U.S. cosmetic sales are exempt from FDA facility registration and product listing. They still must report serious reactions to the FDA within 15 business days.",
-            how: "The exemption doesn’t cover products used near the eyes, or products that change appearance for more than 24 hours.",
+            why: "Businesses averaging under $1 million a year in U.S. cosmetic sales over the past 3 years are exempt from FDA facility registration and product listing. They still must report serious reactions to the FDA within 15 business days.",
+            how: "The exemption doesn’t cover products that touch the eye’s mucous membranes, are injected or for internal use, or change appearance for more than 24 hours.",
             moment: "Your sales grow, or you add an eye product.",
             alert: () =>
               yes("eye")
@@ -1723,14 +1923,13 @@
         },
       ];
       const STATUS_TAG = {
-        p: "Draft, not yet verified",
-        n: "Draft, not yet verified",
-        r: "Draft, not yet verified",
+        p: ["draft", "Draft, not yet verified"],
+        n: ["draft", "Draft, not yet verified"],
+        r: ["askpro", "Ask a pro"],
       };
       function draftTag(it) {
-        return STATUS_TAG[it.status]
-          ? `<span class="draft">${STATUS_TAG[it.status]}</span>`
-          : "";
+        const t = STATUS_TAG[it.status];
+        return t ? `<span class="${t[0]}">${t[1]}</span>` : "";
       }
       function srcHTML(it) {
         const parts = [];
@@ -1743,7 +1942,7 @@
                     `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`,
                 )
                 .join(", ") +
-              " (checked 10/5/26)",
+              ` (checked ${it.checked || "10/5/26"})`,
           );
         if (it.pro) parts.push(`Confirm this with ${it.pro}.`);
         return parts.length ? `<p class="src">${parts.join(" ")}</p>` : "";
