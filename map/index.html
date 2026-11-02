@@ -743,7 +743,7 @@
               status: "v",
               q: "Have you searched to make sure your business name isn’t already trademarked?",
               why: "Operating under a name or logo that’s already trademarked can force a rebrand.",
-              how: "Search the USPTO’s Trademark Search at tmsearch.uspto.gov before you commit to a name.",
+              how: "Search the USPTO’s Trademark Search at tmsearch.uspto.gov before you commit to a name. If you decide to register, the federal application fee is $350 per class of goods or services.",
               moment:
                 "You’re forced to rebrand after you’ve already printed and launched.",
             },
@@ -820,9 +820,9 @@
               optional: true,
               q: "If you operate under a name different from your legal name, is it registered as a DBA?",
               why: "Registering lets you legally do business under a name other than your legal one. Banks and payment platforms commonly ask for proof of registration before you can use that name.",
-              how: "Sole proprietors and partnerships file with the county clerk in each county where they do business; registrations last five years, and each county sets its own fee (Saginaw County charges $16 for a new filing). LLCs and corporations file their assumed name with the state through LARA instead.",
+              how: "Sole proprietors and partnerships file with the county clerk in each county where they do business, and registrations last five years. In Wayne County the fee is $16. LLCs file a Certificate of Assumed Name with LARA for $25 (corporations pay $10), good for about five years.",
               howSole:
-                "File with the county clerk in each county where you do business. Registrations last five years, and each county sets its own fee (Saginaw County charges $16 for a new filing).",
+                "File with the county clerk in each county where you do business. Registrations last five years, and in Wayne County the fee is $16.",
               moment:
                 "A bank or payment platform asks for proof that you can operate under that name.",
             },
@@ -915,7 +915,7 @@
               status: "v",
               q: "Has a licensed attorney reviewed your contract?",
               why: "A contract you wrote yourself or pulled from a template hasn’t been checked for enforceability under your state’s law.",
-              how: "Ask a Michigan business attorney for a flat-fee review before you start using the contract. The State Bar’s Lawyer Referral Service can connect you.",
+              how: "Detroit businesses can get free help: the Detroit Neighborhood Entrepreneurs Project connects Detroit-based small businesses to free legal services through U-M’s Community Enterprise Clinic (applications year-round; new clients usually start in September), and Wayne State’s Business and Community Law Clinic offers free transactional help to under-resourced Detroit-area small businesses. Otherwise, ask a Michigan business attorney for a flat-fee review; the State Bar’s Lawyer Referral Service can connect you.",
               moment: "The first time the contract is actually tested.",
             },
             {
@@ -1038,6 +1038,26 @@
         countyDba: {
           t: "Example county clerk assumed name rules (Saginaw County)",
           u: "https://saginawcountymi.gov/departments/county-clerk/business-registration-assumed-names",
+        },
+        wayneDba: {
+          t: "Wayne County Clerk: Assumed names",
+          u: "https://www.waynecountymi.gov/Services/Business/Assumed-Names",
+        },
+        laraDba: {
+          t: "LARA Certificate of Assumed Name form",
+          u: "https://michigan.gov/documents/lara/541_08-15_527736_7.pdf",
+        },
+        usptoCost: {
+          t: "USPTO: How much does a trademark cost?",
+          u: "https://www.uspto.gov/trademarks/basics/how-much-does-it-cost",
+        },
+        dnep: {
+          t: "U-M Detroit Neighborhood Entrepreneurs Project: legal assistance",
+          u: "https://detroitsmallbusiness.umich.edu/services/legal-assistance",
+        },
+        wayneBclc: {
+          t: "Wayne Law Business and Community Law Clinic",
+          u: "https://law.wayne.edu/clinics/business",
         },
         irsEin: {
           t: "IRS: Apply for an EIN online",
@@ -1211,14 +1231,14 @@
 
       /* Sources for the core checklist items (checked 11/1/26). Added here because SRC is defined after LEVELS. */
       const CORE_SRC = {
-        tm: [SRC.uspto],
+        tm: [SRC.uspto, SRC.usptoCost],
         atty: [SRC.michbarLrs],
         entity: [SRC.lara700, SRC.laraFaq],
         ein: [SRC.irsEin],
-        dba: [SRC.countyDba, SRC.laraFaq],
+        dba: [SRC.wayneDba, SRC.laraDba],
         license: [SRC.detroitLic],
         tax: [SRC.irsEst, SRC.miEst],
-        review: [SRC.michbarLrs],
+        review: [SRC.dnep, SRC.wayneBclc, SRC.michbarLrs],
         annual: [SRC.laraAnnual, SRC.laraFaq],
       };
       Object.values(LEVELS).forEach((lvl) =>
