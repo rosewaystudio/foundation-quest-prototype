@@ -761,7 +761,7 @@
               status: "v",
               q: "Do you know which business attorney you’d call if you needed one?",
               why: "You don’t need a retainer, but you should know who you’d call before you need one, so you’re not choosing under pressure.",
-              how: "The State Bar of Michigan Lawyer Referral Service, (800) 968-0738, matches you with an attorney for a first consultation of up to 25 minutes for a $25 fee.",
+              how: "The State Bar of Michigan Lawyer Referral Service, (800) 968-0738, matches you with an attorney for a first consultation of up to 25 minutes, for a $25 administrative fee.",
               moment:
                 "Something goes wrong and you’re choosing a lawyer in a hurry.",
             },
@@ -787,7 +787,7 @@
               status: "v",
               gate: true,
               q: "Do you have an EIN, your federal tax ID?",
-              why: "You need it to open a business bank account, file business taxes, and apply for most grants and contracts.",
+              why: "It’s your business’s federal tax ID. The IRS requires one if you hire employees or operate as a partnership or corporation, and banks and grant applications commonly ask for it.",
               how: "Apply online at irs.gov. It’s always free, and if you’re approved you get your EIN right away. Skip any site that charges for one.",
               moment:
                 "You go to open a business bank account or fill out a grant application.",
@@ -819,10 +819,10 @@
               status: "v",
               optional: true,
               q: "If you operate under a name different from your legal name, is it registered as a DBA?",
-              why: "If you operate under a name different from your legal entity name, you need a DBA registration to open bank accounts, sign contracts, and accept payments under your operating name.",
-              how: "Sole proprietors and partnerships file with the county clerk in each county where they do business; registrations last five years, and fees vary by county. LLCs and corporations file a Certificate of Assumed Name with LARA instead.",
+              why: "Registering lets you legally do business under a name other than your legal one. Banks and payment platforms commonly ask for proof of registration before you can use that name.",
+              how: "Sole proprietors and partnerships file with the county clerk in each county where they do business; registrations last five years, and each county sets its own fee (Saginaw County charges $16 for a new filing). LLCs and corporations file their assumed name with the state through LARA instead.",
               howSole:
-                "File with the county clerk in each county where you do business. Registrations last five years, and fees vary by county.",
+                "File with the county clerk in each county where you do business. Registrations last five years, and each county sets its own fee (Saginaw County charges $16 for a new filing).",
               moment:
                 "A bank or payment platform asks for proof that you can operate under that name.",
             },
@@ -869,8 +869,8 @@
               checked: "11/1/26",
               status: "v",
               q: "Do you have a plan for quarterly estimated taxes?",
-              why: "As a self-employed owner, taxes aren’t withheld automatically. You’re required to make quarterly estimated payments or face underpayment penalties.",
-              how: "Federal estimated payments generally apply if you expect to owe $1,000 or more. Michigan’s are due April 15, June 15, September 15, and January 15, using Form MI-1040ES. A common rule of thumb is setting aside 25 to 30 percent of net profit; confirm your amounts with a CPA.",
+              why: "As a self-employed owner, taxes aren’t withheld automatically. If you expect to owe $1,000 or more, you generally need to make quarterly estimated payments, or you may owe an underpayment penalty.",
+              how: "Michigan’s estimated payments are due April 15, June 15, September 15, and January 15, using Form MI-1040ES. A common rule of thumb is setting aside 25 to 30 percent of net profit for federal and state taxes; confirm your amounts with a CPA.",
               moment: "A quarterly deadline passes and you owe a penalty.",
             },
           ],
@@ -1060,8 +1060,12 @@
           u: "https://www.michigan.gov/taxes/questions/iit/accordion/estimate/when-are-the-quarterly-estimated-tax-payments-due-1",
         },
         irsEst: {
-          t: "IRS: who pays estimated tax",
-          u: "https://www.irs.gov/node/99546",
+          t: "IRS: Estimated taxes",
+          u: "https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes",
+        },
+        laraAnnual: {
+          t: "LARA: Annual reports and annual statements",
+          u: "https://michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
         },
         laraBcc: {
           t: "LARA Bureau of Construction Codes licensing",
@@ -1215,7 +1219,7 @@
         license: [SRC.detroitLic],
         tax: [SRC.irsEst, SRC.miEst],
         review: [SRC.michbarLrs],
-        annual: [SRC.laraFaq],
+        annual: [SRC.laraAnnual, SRC.laraFaq],
       };
       Object.values(LEVELS).forEach((lvl) =>
         lvl.items.forEach((it) => {
@@ -1409,7 +1413,7 @@
             id: "fallergen",
             title: "Allergens named on labels",
             checked: "11/1/26",
-            src: [SRC.fdaAllergen, SRC.mdardLabel],
+            src: [SRC.fdaAllergen],
             status: "v",
             when: () => has("food"),
             what: "Allergen labeling means naming any major food allergen your product contains.",
@@ -1507,7 +1511,7 @@
             what: "Standard cosmetic labels name the product, its net contents, and its ingredients.",
             q: "Do your labels show the product name, net contents, and a full ingredient list?",
             why: "FDA requires these on every cosmetic label.",
-            how: "Front panel: what the product is, and the net quantity near the bottom. Back or side: your business name and street address (a P.O. box or website isn’t enough), ingredients from most to least, and any warnings the product needs.",
+            how: "Front panel: what the product is, and the net quantity in the bottom 30 percent of that panel (very small packages are exempt from that placement rule). Back or side: your business name and street address (a P.O. box or website isn’t enough), ingredients from most to least, and any warnings the product needs.",
             moment: "Your first label print.",
           },
           {
@@ -1656,8 +1660,8 @@
             when: () => has("goods") && yes("candles"),
             what: "Candle labeling covers the safety warnings and information on candles and wax melts.",
             q: "Do your candles and wax melts carry fire-safety warnings and labeling?",
-            why: "Federal law bans candle wicks whose metal core has more than 0.06% lead, and packaged candles need standard consumer labeling.",
-            how: "Use lead-free wicks. If you use metal-cored wicks, you need a General Certificate of Compliance. Your label needs what the product is, the net quantity, and your business name and address. Fire-safety warnings follow a voluntary standard (ASTM F2058) and are strongly recommended.",
+            why: "Federal law bans candle wicks whose metal core has more than 0.06% lead. Candles sold in packages are generally treated as consumer commodities under the federal packaging and labeling rules (16 CFR Part 500).",
+            how: "Use lead-free wicks. If you use metal-cored wicks, you need a General Certificate of Compliance. Under the federal labeling rules, a packaged product’s label shows what it is, the net quantity, and your business name and address. Fire-safety warnings follow a voluntary standard (ASTM F2058) and are strongly recommended.",
             moment: "Your first candle batch.",
           },
           {
@@ -1669,7 +1673,7 @@
             when: () => has("goods") && yes("foodcontact"),
             what: "Food-contact items are anything that touches food or drink, like mugs, plates, and cutting boards.",
             q: "Have you checked the rules for items that touch food or drink?",
-            why: "Glazes can leach lead into food and drink. FDA has action levels for lead that leaches from ceramic tableware, and it applies them to U.S.-made and imported pottery.",
+            why: "Glazes can leach lead into food and drink. FDA has action levels for lead that leaches from ceramic tableware, and its compliance policy on lead in ceramics covers both domestic and imported ware.",
             how: "Use food-safe glazes and have finished pieces lab-tested for leachable lead before you sell them for food use.",
             moment: "You sell your first mug or cutting board.",
           },
@@ -1695,8 +1699,8 @@
               (has("trade") || has("pro") || has("othersvc")) && yes("helpers"),
             what: "Worker classification decides whether someone who helps you is an independent contractor or an employee.",
             q: "Do you know whether your helpers count as contractors or employees?",
-            why: "It decides whether you owe payroll taxes for them. The IRS looks at behavioral control, financial control, and the relationship, not what you call the person or how much you pay them.",
-            how: "If a helper is a contractor and you pay them $2,000 or more in a year, you file a Form 1099-NEC for them. That threshold was $600 before 2026 and may adjust for inflation starting in 2027. A 1099 is a reporting step; it doesn’t make someone a contractor. Unsure? IRS Form SS-8 asks the IRS to decide, and a CPA can help before you pay a helper regularly.",
+            why: "It decides whether you owe payroll taxes for them. The IRS weighs behavioral control, financial control, and the relationship between you, using all the facts.",
+            how: "If a helper is a contractor and you pay them $2,000 or more in a year, you file a Form 1099-NEC for them. That threshold applies starting with 2026 payments and may adjust for inflation starting in 2027. A 1099 is a reporting step; it doesn’t make someone a contractor. Unsure? IRS Form SS-8 asks the IRS to decide, and a CPA can help before you pay a helper regularly.",
             moment: "You bring the same helper on jobs every week.",
           },
           {
@@ -1733,7 +1737,7 @@
             when: () => has("pro") && yes("data"),
             what: "Client data is any personal or financial information you hold for clients.",
             q: "Do you have a plan for storing clients’ personal or financial information?",
-            why: "If someone gets unauthorized access to Michigan residents’ personal information you hold, Michigan law can require you to notify them.",
+            why: "If unencrypted personal information about Michigan residents that you own or license is accessed and acquired without authorization, Michigan law generally requires you to notify them, unless the breach isn’t likely to cause substantial loss or identity theft.",
             how: "Follow the FTC’s five steps: know what you have, keep only what you need, lock it down, dispose of it properly, and plan for a breach.",
             moment: "A client sends you bank statements or ID.",
           },
