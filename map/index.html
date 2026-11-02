@@ -776,7 +776,7 @@
               q: "Is your business legally formed with the state?",
               qN: "Is your nonprofit incorporated with the state?",
               why: "Your legal structure determines how you’re taxed, how your personal assets are protected, and how contracts are written. Without a formal entity, your personal and business finances are legally the same thing.",
-              how: "File Articles of Organization with Michigan LARA. The filing fee is $50. The Articles must name a resident agent and the street address of the registered office, where the agent receives legal papers for the business.",
+              how: "File Articles of Organization with Michigan LARA. The filing fee is $50, and standard review takes up to 10 business days. Faster review costs extra: $50 more for 24-hour review, or $100 more for same-day review. The Articles must name a resident agent and the street address of the registered office, where the agent receives legal papers for the business.",
               moment:
                 "A bank, client, or funder asks for the name of your legal entity.",
             },
@@ -1043,6 +1043,10 @@
           t: "MDARD: Food allergens",
           u: "https://www.michigan.gov/mdard/food-dairy/food-safety/food-allergens",
         },
+        miBizRegistry: {
+          t: "LARA MiBusiness Registry: Articles of Organization filing screen (login required)",
+          u: "https://www.michigan.gov/lara/bureau-list/cscl/corps",
+        },
         wayneDba: {
           t: "Wayne County Clerk: Assumed names",
           u: "https://www.waynecountymi.gov/Services/Business/Assumed-Names",
@@ -1237,7 +1241,7 @@
       const CORE_SRC = {
         tm: [SRC.uspto, SRC.usptoCost],
         atty: [SRC.michbarLrs],
-        entity: [SRC.lara700, SRC.laraFaq],
+        entity: [SRC.miBizRegistry, SRC.lara700, SRC.laraFaq],
         ein: [SRC.irsEin],
         dba: [SRC.wayneDba, SRC.laraDba],
         license: [SRC.detroitLic],
