@@ -2632,6 +2632,30 @@
               },
             );
             if (!res.ok) throw new Error(String(res.status));
+            // "Talk to someone" requests also go to a second form whose only job
+            // is to email Roseway an alert. Best effort: never block the visitor.
+            if (talk) {
+              fetch(
+                `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL}/${HS_TALK_FORM}`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    fields: [
+                      { name: "firstname", value: fn },
+                      { name: "email", value: em },
+                      { name: "fq_business_categories", value: catNames },
+                      { name: "fq_map_progress", value: String(pct) },
+                      { name: "fq_next_moves", value: moves },
+                    ],
+                    context: {
+                      pageUri: location.href.split("?")[0],
+                      pageName: "Foundation Quest – foundation map",
+                    },
+                  }),
+                },
+              ).catch(() => {});
+            }
             $("#askbody").innerHTML =
               `<div class="done" role="status"><p class="win">Thanks, ${safe}. Check your inbox.</p>
       <p>Your next moves are on their way${talk ? ", and we’ll reach out to set up a time to talk through your gaps" : ""}. Don’t see it in a few minutes? Check your spam folder.</p></div>`;
@@ -2647,6 +2671,8 @@
       /* HubSpot form that receives map requests (portal 243240666, "Foundation Quest – Map request"). */
       const HS_PORTAL = "243240666";
       const HS_MAP_FORM = "baa7e1e3-73b4-4ac5-987a-c7ee7d5fb40a";
+      /* Second form ("Foundation Quest – Wants to talk"): its notification is Roseway's alert. */
+      const HS_TALK_FORM = "15623834-9a01-4ed4-ab77-9d02e59f10d6";
       let DEMO_MODE = false;
       try {
         DEMO_MODE = !!new URLSearchParams(location.search).get("demo");
