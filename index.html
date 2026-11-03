@@ -9,8 +9,10 @@
     <meta property="og:description" content="A free, Michigan-specific web app for solo founders, from Roseway Studio." />
     <meta property="og:type" content="website" />
     <script>
-      // Old shared links (e.g. ?demo=...) pointed at the app when it lived at the root.
-      if (location.search) location.replace("/map/" + location.search + location.hash);
+      // Old shared links (?demo=...) pointed at the app when it lived at the root.
+      // Only redirect those: email and ad links add tracking tags (?utm_...) that
+      // must stay on this page.
+      if (new URLSearchParams(location.search).has("demo")) location.replace("/map/" + location.search + location.hash);
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
